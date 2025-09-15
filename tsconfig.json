@@ -1,0 +1,18 @@
+{
+  "extends": "./.quasar/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "#q-app/*": [".quasar/app/*"],
+      "@/*": ["src/*"],
+      "@pwPages/*": ["test/e2e/pages/*"],
+      "@pwHelpers/*": ["test/e2e/helpers/*"],
+      "@pwData/*": ["test/e2e/data/*"],
+      "pages/*": ["src/pages/*"],
+      "layouts/*": ["src/layouts/*"],
+      "stores/*": ["src/stores/*"],
+      "components/*": ["src/components/*"]
+    }
+  },
+  "include": [".quasar", "src", "test", "env.d.ts", "src/shims-vue.d.ts"]
+}
