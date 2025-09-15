@@ -50,6 +50,7 @@ coverage/
 test-results/
 playwright-report/
 playwright-out/
+playwright/.auth/
 
 # Temporary folders
 tmp/
@@ -57,6 +58,10 @@ temp/
 
 # Backup files
 backup-files/
+
+# my comments, notes
+comments.txt
+TODO.txt
 
 # Quasar specific
 .quasar/
