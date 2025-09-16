@@ -1,4 +1,14 @@
 <template>
+  <MessageModal
+    v-model="removeModal"
+    icon="delete_forever"
+    color="red"
+    label="Are you sure you want to remove selected product?"
+    submit-button-label="Remove"
+    submit-button-color="red"
+    @submit="removeProduct()"
+  >
+  </MessageModal>
   <q-page class="q-pa-md">
     <div class="row justify-left">
       <div class="col-12 col-md-12 col-sm-12">
@@ -55,7 +65,7 @@
                 size="sm"
                 color="red"
                 icon="delete"
-                @click="deleteProduct(props.row.id)"
+                @click="openRemoveModal(props.row.id)"
                 flat
                 round
               />
@@ -69,15 +79,19 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import type { QTableColumn } from "quasar";
+import { useQuasar, type QTableColumn } from "quasar";
 import type { Product } from "src/stores/products";
 import { useProductsStore } from "src/stores/products";
 import { storeToRefs } from "pinia";
+import MessageModal from "../../components/modals/MessageModal.vue";
+
+const $q = useQuasar();
 const store = useProductsStore();
 const { getAllProducts } = storeToRefs(store);
 const productsTable = ref<Product[]>([]);
 const tableRef = ref();
 const selected = ref([]);
+const removeModal = ref(false);
 
 const getProducts = async () => {
   const products = await getAllProducts.value;
@@ -85,6 +99,11 @@ const getProducts = async () => {
     productsTable.value = products;
   }
 };
+
+function openRemoveModal(id: number) {
+  store.productId = id;
+  removeModal.value = true;
+}
 
 const deleteSelected = async () => {
   console.log(`Delete selected pressed! ${selected.value.length}`);
@@ -100,10 +119,22 @@ const editProduct = async (productId: number) => {
   // For example, navigate to edit page or open edit modal
 };
 
-const deleteProduct = async (productId: number) => {
-  console.log(`Delete product pressed! Product ID: ${productId}`);
-  // TODO: Implement product delete logic
-  // For example, navigate to edit page or open edit modal
+const removeProduct = async () => {
+  if (!store.productId) return;
+  console.log(`Remove product pressed! Product ID: ${store.productId}`);
+  const remove = await store.removeProduct(store.productId);
+
+  store.productId = null;
+  removeModal.value = false;
+
+  $q.notify({
+    color: remove ? "green-4" : "red-5",
+    textColor: "white",
+    icon: remove ? "cloud_done" : "warning",
+    message: remove
+      ? "The product has been removed."
+      : "There was a problem while removing the product.",
+  });
 };
 
 onMounted(async () => {

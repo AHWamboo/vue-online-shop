@@ -32,7 +32,10 @@ export type ProductByCategory = {
 };
 
 export const useProductsStore = defineStore("products", {
-  state: () => ({}),
+  state: () => ({
+    products: [] as Product[],
+    productId: null as number | null,
+  }),
   getters: {
     getAllProductCategories: async () => {
       const { data: productCategories, error } = await supabase
@@ -201,20 +204,19 @@ export const useProductsStore = defineStore("products", {
 
       return data;
     },
-    // removeProduct: async (id: number) => { // trash bs - TODO
-    //   const { error } = await supabase
-    //     .from("contact_messages")
-    //     .delete()
-    //     .eq("id", id);
+    async removeProduct(id: number) {
+      const { error } = await supabase.from("products").delete().eq("id", id);
 
-    //   if (error) {
-    //     console.warn(`Error in "removeContactMessage": ${error.details}`);
-    //     return false;
-    //   }
+      if (error) {
+        console.warn(`Error in "removeProduct": ${error.details}`);
+        return false;
+      }
 
-    //   this.items = this.items.filter((m) => m.id !== id);
-    //   return true;
-    // },
+      this.products = this.products.filter(
+        (product: Product) => product.id !== id
+      );
+      return true;
+    },
   },
 });
 

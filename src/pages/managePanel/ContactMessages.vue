@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <contact-message-modal
+    <MessageModal
       v-model="moveToInboxModal"
       icon="move_to_inbox"
       color="black"
@@ -74,9 +74,9 @@
       submit-button-color="red"
       @submit="moveToInbox()"
     >
-    </contact-message-modal>
+    </MessageModal>
 
-    <contact-message-modal
+    <MessageModal
       v-model="removeModal"
       icon="delete"
       color="red"
@@ -85,9 +85,9 @@
       submit-button-color="red"
       @submit="markAsRemoved()"
     >
-    </contact-message-modal>
+    </MessageModal>
 
-    <contact-message-modal
+    <MessageModal
       v-model="removeCompletely"
       icon="delete_forever"
       color="red"
@@ -96,9 +96,9 @@
       submit-button-color="red"
       @submit="removeMessage()"
     >
-    </contact-message-modal>
+    </MessageModal>
 
-    <contact-message-modal
+    <MessageModal
       v-model="doneModal"
       icon="done"
       color="green"
@@ -107,9 +107,9 @@
       submit-button-color="green"
       @submit="markAsDone()"
     >
-    </contact-message-modal>
+    </MessageModal>
 
-    <contact-message-modal
+    <MessageModal
       v-model="removeDoneModal"
       icon="remove_done"
       color="orange"
@@ -118,7 +118,7 @@
       submit-button-color="orange"
       @submit="removeDone()"
     >
-    </contact-message-modal>
+    </MessageModal>
 
     <q-dialog v-model="messageModal">
       <q-card>
@@ -143,7 +143,7 @@
           <q-separator />
         </q-list>
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" color="primary" v-close-popup />
+          <q-btn v-close-popup flat label="Cancel" color="primary" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -158,7 +158,7 @@ import {
   MessageStatus,
 } from "src/stores/contactMessages";
 import { computed, onMounted, ref, watch } from "vue";
-import ContactMessageModal from "../../components/modals/ContactMessageModal.vue";
+import MessageModal from "../../components/modals/MessageModal.vue";
 import ContactMessagesList from "../../components/managePanel/ContactMessagesList/ContactMessagesList.vue";
 
 export type ModalType = // trash bs - move these types to separate files
@@ -287,13 +287,13 @@ async function moveToInbox() {
 async function removeMessage() {
   if (!store.messageId) return;
 
-  const deleted = await store.removeContactMessage(store.messageId);
+  const removed = await store.removeContactMessage(store.messageId);
 
   $q.notify({
     color: "green-4",
     textColor: "white",
-    icon: deleted ? "cloud_done" : "warning",
-    message: deleted
+    icon: removed ? "cloud_done" : "warning",
+    message: removed
       ? "The message has been removed completely."
       : "There was a problem.",
   });

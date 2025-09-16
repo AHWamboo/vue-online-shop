@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
-import ContactMessageModal from "./ContactMessageModal.vue";
+import MessageModal from "./MessageModal.vue";
 
 const mountWithStubs = (props = {}) => {
   const defaultProps = {
@@ -12,7 +12,7 @@ const mountWithStubs = (props = {}) => {
     submitButtonColor: "red",
   };
 
-  return mount(ContactMessageModal, {
+  return mount(MessageModal, {
     props: { ...defaultProps, ...props },
     global: {
       // Stub all Quasar components as simple div-s with slots
@@ -64,7 +64,7 @@ const mountWithStubs = (props = {}) => {
   });
 };
 
-describe("ContactMessageModal - basic behavior tests", () => {
+describe("MessageModal - basic behavior tests", () => {
   test("Should render modal with correct props", async () => {
     const wrapper = mountWithStubs({
       icon: "email",
