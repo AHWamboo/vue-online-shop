@@ -3,10 +3,10 @@
     <div class="row justify-center">
       <div class="col-xl-4 col-md-7 col-sm-12 col-xs-12">
         <h2>Log in!</h2>
-        <q-form @submit="onSubmit" class="q-gutter-md">
+        <q-form class="q-gutter-md" @submit="onSubmit">
           <q-input
-            filled
             v-model="email"
+            filled
             label="Your email@domain.com"
             hint="Your email address"
             lazy-rules
@@ -16,8 +16,8 @@
           ></q-input>
 
           <q-input
-            filled
             v-model="name"
+            filled
             label="Your password"
             hint="Your password"
             lazy-rules
@@ -36,17 +36,6 @@
     </div>
   </q-page>
 </template>
-
-<style scoped>
-.col {
-  background: lightblue;
-  margin-right: 10px;
-}
-
-.separator {
-  padding: 5px;
-}
-</style>
 
 <script setup lang="ts">
 import { useQuasar } from "quasar";
@@ -75,3 +64,14 @@ async function onSubmit() {
   });
 }
 </script>
+
+<style scoped>
+.col {
+  background: lightblue;
+  margin-right: 10px;
+}
+
+.separator {
+  padding: 5px;
+}
+</style>

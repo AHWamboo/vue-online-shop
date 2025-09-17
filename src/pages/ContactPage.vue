@@ -3,18 +3,18 @@
     <div class="row justify-center">
       <div class="col-xl-6 col-md-7 col-sm-12 col-xs-12">
         <h1 class="contact-label">Contact!</h1>
-        <q-form @submit.prevent="onSubmit" @reset="onReset" class="q-gutter-md">
+        <q-form class="q-gutter-md" @submit.prevent="onSubmit" @reset="onReset">
           <q-select
-            filled
             v-model="topic"
+            filled
             :options="messageTopics"
             label="Message topic"
             hint="Choose message topic"
           ></q-select>
 
           <q-input
-            filled
             v-model="email"
+            filled
             label="Your email@domain.com"
             hint="Your email address"
             lazy-rules
@@ -24,8 +24,8 @@
           ></q-input>
 
           <q-input
-            filled
             v-model="name"
+            filled
             label="Your name"
             hint="Name and surname"
             lazy-rules
@@ -35,10 +35,10 @@
           ></q-input>
 
           <q-input
+            v-model="message"
             filled
             clearable
             type="textarea"
-            v-model="message"
             label="Your message"
             hint="Please write your message"
             lazy-rules
@@ -67,15 +67,6 @@
     </div>
   </q-page>
 </template>
-
-<style lang="scss" scoped>
-@use "../styles/variables.scss" as *;
-
-.contact-label {
-  text-align: center;
-  color: $main-text-color;
-}
-</style>
 
 <script setup lang="ts">
 import { useQuasar } from "quasar";
@@ -135,3 +126,12 @@ function onReset() {
   topic.value = null;
 }
 </script>
+
+<style lang="scss" scoped>
+@use "../styles/variables.scss" as *;
+
+.contact-label {
+  text-align: center;
+  color: $main-text-color;
+}
+</style>

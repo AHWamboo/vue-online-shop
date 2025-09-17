@@ -213,6 +213,7 @@ export const useProductsStore = defineStore("products", {
       }
 
       this.products = this.products.filter(
+        // TODO - use this state products on frontend
         (product: Product) => product.id !== id
       );
       return true;

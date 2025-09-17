@@ -19,17 +19,17 @@
         </div>
 
         <q-table
+          ref="tableRef"
+          v-model:selected="selected"
           flat
           bordered
-          ref="tableRef"
           title="Products"
           :rows="rows"
           :columns="columns"
           row-key="id"
           selection="multiple"
-          v-model:selected="selected"
         >
-          <template v-slot:top>
+          <template #top>
             <div class="row items-center justify-between q-pa-sm">
               <div class="text-h6">Products</div>
               <q-btn
@@ -37,37 +37,37 @@
                 class="products-table-delete-button"
                 icon="delete"
                 color="negative"
-                @click="deleteSelected"
                 :disable="selected.length === 0"
+                @click="deleteSelected"
               />
             </div>
           </template>
 
-          <template v-slot:header-selection="scope">
+          <template #header-selection="scope">
             <q-checkbox v-model="scope.selected" color="dark" />
           </template>
 
-          <template v-slot:body-selection="scope">
+          <template #body-selection="scope">
             <q-checkbox v-model="scope.selected" color="dark" />
           </template>
 
-          <template v-slot:body-cell-actions="props">
+          <template #body-cell-actions="props">
             <q-td :props="props">
               <q-btn
                 size="sm"
                 color="primary"
                 icon="edit"
-                @click="editProduct(props.row.id)"
-                flat
                 round
+                flat
+                @click="editProduct(props.row.id)"
               />
               <q-btn
                 size="sm"
                 color="red"
                 icon="delete"
-                @click="openRemoveModal(props.row.id)"
-                flat
                 round
+                flat
+                @click="openRemoveModal(props.row.id)"
               />
             </q-td>
           </template>

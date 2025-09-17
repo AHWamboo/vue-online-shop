@@ -3,12 +3,12 @@
     <div class="row justify-left">
       <div class="col-xl-4 col-md-7 col-sm-12 col-xs-12">
         <h2 class="brand-red">Add new product</h2>
-        <q-form @submit="onSubmit" class="q-gutter-md">
+        <q-form class="q-gutter-md" @submit="onSubmit">
           <q-input
+            v-model="productName"
             clearable
             clear-icon="close"
             filled
-            v-model="productName"
             label="Name"
             hint="Your new product name"
             lazy-rules
@@ -22,10 +22,10 @@
           ></q-input>
 
           <q-input
+            v-model="productPrice"
             clearable
             clear-icon="close"
             filled
-            v-model="productPrice"
             label="Price"
             hint="Your new product price"
             lazy-rules
@@ -41,10 +41,10 @@
           ></q-input>
 
           <q-input
+            v-model="productDescription"
             clearable
             clear-icon="close"
             filled
-            v-model="productDescription"
             label="Description"
             hint="Your new product description"
             lazy-rules
@@ -60,10 +60,10 @@
           ></q-input>
 
           <q-input
+            v-model="productShortDescription"
             clearable
             clear-icon="close"
             filled
-            v-model="productShortDescription"
             label="Short description"
             hint="Your new product short description"
             lazy-rules
@@ -79,10 +79,10 @@
           ></q-input>
 
           <q-input
+            v-model="productImageUrl"
             clearable
             clear-icon="close"
             filled
-            v-model="productImageUrl"
             label="Image url"
             hint="Your product image url address"
             lazy-rules
@@ -97,17 +97,17 @@
           ></q-input>
 
           <q-select
-            filled
             v-model="productCategory"
+            filled
             :options="productCategoriesList"
-            @update:model-value="onProductCategoryChange"
-            label="Product categories"
             hint="Choose product category"
+            label="Product categories"
+            @update:model-value="onProductCategoryChange"
           ></q-select>
 
           <q-select
-            filled
             v-model="productSubCategory"
+            filled
             :options="productSubCategoriesList"
             label="Product sub category"
             hint="Choose product sub category"

@@ -1,10 +1,10 @@
 <template>
   <div v-if="messages.length !== 0">
     <q-list
-      bordered
-      class="rounded-borders"
       v-for="message in messages"
       :key="message.id"
+      bordered
+      class="rounded-borders"
     >
       <q-item>
         <q-item-section avatar>

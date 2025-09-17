@@ -61,9 +61,9 @@
               <div class="text-h6 q-mb-md">Subcategories</div>
               <div class="row q-col-gutter-md">
                 <div
-                  class="col-6 col-sm-4 col-md-3"
                   v-for="subcategory in productCategoriesList?.subcategories"
                   :key="subcategory.id"
+                  class="col-6 col-sm-4 col-md-3"
                 >
                   <q-img class="subcategory-img" :src="subcategory.image" />
                   <div class="text-center text-primary">
@@ -80,12 +80,12 @@
                 <div class="row items-center">
                   <div class="q-mr-sm">Sort by:</div>
                   <q-select
+                    v-model="sortBy"
                     dense
                     outlined
                     :options="['Price Low to High', 'Newest']"
-                    v-model="sortBy"
-                    @update:model-value="(val) => onSortByChange(val)"
                     style="min-width: 150px"
+                    @update:model-value="(val) => onSortByChange(val)"
                   />
                 </div>
               </div>

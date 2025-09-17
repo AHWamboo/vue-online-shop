@@ -55,17 +55,17 @@
         </p>
 
         <q-select
+          v-model="productSize"
           class="product-size"
           outlined
-          v-model="productSize"
           :options="['S', 'M', 'L', 'XL', 'XXL']"
           label="Size:"
         ></q-select>
 
         <div class="row">
           <q-input
-            class="product-quantity"
             v-model.number="productQuantity"
+            class="product-quantity"
             type="number"
             outlined
           />

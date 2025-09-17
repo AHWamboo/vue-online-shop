@@ -7,12 +7,12 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Cancel" color="primary" v-close-popup />
+        <q-btn v-close-popup flat label="Cancel" color="primary" />
         <q-btn
+          v-close-popup
           flat
           :label="submitButtonLabel"
           :color="submitButtonColor"
-          v-close-popup
           @click="emit('submit')"
         />
       </q-card-actions>

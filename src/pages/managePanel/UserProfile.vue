@@ -3,12 +3,12 @@
     <div class="row justify-left">
       <div class="col-xl-4 col-md-7 col-sm-12 col-xs-12">
         <h2 class="brand-red">User profile</h2>
-        <q-form @submit="onSubmit" class="q-gutter-md">
+        <q-form class="q-gutter-md" @submit="onSubmit">
           <q-input
+            v-model="username"
             clearable
             clear-icon="close"
             filled
-            v-model="username"
             label="Username"
             hint="Your profile user name"
             lazy-rules
@@ -22,10 +22,10 @@
           ></q-input>
 
           <q-input
+            v-model="name"
             clearable
             clear-icon="close"
             filled
-            v-model="name"
             label="Name"
             hint="Your name"
             lazy-rules
@@ -50,10 +50,10 @@
 
           <q-input
             v-else
+            v-model="avatarUrl"
             clearable
             clear-icon="close"
             filled
-            v-model="avatarUrl"
             label="Avatar url"
             hint="Your avatar url address"
             lazy-rules
@@ -68,10 +68,10 @@
           ></q-input>
 
           <q-input
+            v-model="websiteUrl"
             clearable
             clear-icon="close"
             filled
-            v-model="websiteUrl"
             label="Website url"
             hint="Your website url address"
             lazy-rules
@@ -96,17 +96,6 @@
     </div>
   </q-page>
 </template>
-
-<style>
-#avatar-img {
-  text-align: center;
-}
-
-#avatar-img .q-img__image {
-  width: 43%;
-  height: 46%;
-}
-</style>
 
 <script setup lang="ts">
 import { useQuasar } from "quasar";
@@ -188,3 +177,14 @@ function onSubmit() {
   console.log(file.value);
 }
 </script>
+
+<style>
+#avatar-img {
+  text-align: center;
+}
+
+#avatar-img .q-img__image {
+  width: 43%;
+  height: 46%;
+}
+</style>

@@ -1,20 +1,20 @@
 <template>
   <q-btn-dropdown
+    v-for="productCategory in productCategoriesList"
+    :key="productCategory.categoryName"
     split
     stretch
     flat
-    v-for="productCategory in productCategoriesList"
     :to="`/category/${productCategory.categoryName}`"
-    :key="productCategory.categoryName"
     :label="productCategory.categoryName"
   >
     <q-list>
       <q-item
         v-for="subCategory in productCategory.subCategories"
-        :to="`/${productCategory.categoryName}/${subCategory.name}`"
         :key="subCategory"
-        clickable
         v-close-popup
+        :to="`/${productCategory.categoryName}/${subCategory.name}`"
+        clickable
       >
         <q-item-section>
           <q-item-label class="sub-category-label">{{

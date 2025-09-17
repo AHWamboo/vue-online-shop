@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-none">
-    <q-carousel animated v-model="slide" infinite arrows>
+    <q-carousel v-model="slide" animated infinite arrows>
       <q-carousel-slide
         :name="1"
         img-src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/sliders/main-slider/main-page-slider-1.jpg"
@@ -113,6 +113,12 @@
   </q-page>
 </template>
 
+<script setup lang="ts">
+import { ref } from "vue";
+
+const slide = ref(1);
+</script>
+
 <style scoped>
 .col {
   background: lightblue;
@@ -198,9 +204,3 @@
   }
 }
 </style>
-
-<script setup lang="ts">
-import { ref } from "vue";
-
-const slide = ref(1);
-</script>

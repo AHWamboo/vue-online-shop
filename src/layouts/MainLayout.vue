@@ -3,7 +3,7 @@
     <main-header-top-menu></main-header-top-menu>
 
     <q-page-container>
-      <div class="row" id="main">
+      <div id="main" class="row">
         <div class="col">
           <router-view />
         </div>
