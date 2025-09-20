@@ -9,6 +9,18 @@
     @submit="removeProduct()"
   >
   </MessageModal>
+
+  <MessageModal
+    v-model="editModal"
+    icon="edit"
+    color="primary"
+    label="Edit"
+    submit-button-label="Edit"
+    submit-button-color="primary"
+    @submit="editProduct()"
+  >
+  </MessageModal>
+
   <q-page class="q-pa-md">
     <div class="row justify-left">
       <div class="col-12 col-md-12 col-sm-12">
@@ -59,7 +71,7 @@
                 icon="edit"
                 round
                 flat
-                @click="editProduct(props.row.id)"
+                @click="openEditModal(props.row.id)"
               />
               <q-btn
                 size="sm"
@@ -92,6 +104,7 @@ const productsTable = ref<Product[]>([]);
 const tableRef = ref();
 const selected = ref([]);
 const removeModal = ref(false);
+const editModal = ref(false);
 
 const getProducts = async () => {
   const products = await getAllProducts.value;
@@ -105,6 +118,12 @@ function openRemoveModal(id: number) {
   removeModal.value = true;
 }
 
+function openEditModal(id: number) {
+  store.productId = id;
+  editModal.value = true;
+  console.log(store.productId);
+}
+
 const deleteSelected = async () => {
   console.log(`Delete selected pressed! ${selected.value.length}`);
   // const idsToDelete = selected.value.map((item: ProductRow) => item.id);
@@ -113,8 +132,8 @@ const deleteSelected = async () => {
   // selected.value = [];
 };
 
-const editProduct = async (productId: number) => {
-  console.log(`Edit product pressed! Product ID: ${productId}`);
+const editProduct = async () => {
+  console.log(`Edit product pressed! Product ID`);
   // TODO: Implement product editing logic
   // For example, navigate to edit page or open edit modal
 };
