@@ -10,16 +10,7 @@
   >
   </MessageModal>
 
-  <MessageModal
-    v-model="editModal"
-    icon="edit"
-    color="primary"
-    label="Edit"
-    submit-button-label="Edit"
-    submit-button-color="primary"
-    @submit="editProduct()"
-  >
-  </MessageModal>
+  <EditProductModal v-model="editModal"></EditProductModal>
 
   <q-page class="q-pa-md">
     <div class="row justify-left">
@@ -96,6 +87,7 @@ import type { Product } from "src/stores/products";
 import { useProductsStore } from "src/stores/products";
 import { storeToRefs } from "pinia";
 import MessageModal from "../../components/modals/MessageModal.vue";
+import EditProductModal from "../../components/modals/EditProductModal.vue";
 
 const $q = useQuasar();
 const store = useProductsStore();
@@ -132,11 +124,11 @@ const deleteSelected = async () => {
   // selected.value = [];
 };
 
-const editProduct = async () => {
-  console.log(`Edit product pressed! Product ID`);
-  // TODO: Implement product editing logic
-  // For example, navigate to edit page or open edit modal
-};
+// const editProduct = async () => {
+//   console.log(`Edit product pressed! Product ID`);
+//   // TODO: Implement product editing logic
+//   // For example, navigate to edit page or open edit modal
+// };
 
 const removeProduct = async () => {
   if (!store.productId) return;

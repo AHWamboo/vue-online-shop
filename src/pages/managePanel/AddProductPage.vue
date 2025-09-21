@@ -4,6 +4,21 @@
       <div class="col-xl-4 col-md-7 col-sm-12 col-xs-12">
         <h2 class="brand-red">Add new product</h2>
         <q-form class="q-gutter-md" @submit="onSubmit">
+          <TextInput
+            v-model="productName"
+            label="Name"
+            hint="Your new product name"
+            :validation-rules="[
+              (val) =>
+                (typeof val === 'string' && val.trim().length > 0) ||
+                'Please enter your product name.',
+              (val) =>
+                !val ||
+                String(val).length <= 50 ||
+                'Please use maximum 50 characters.',
+            ]"
+          ></TextInput>
+
           <q-input
             v-model="productName"
             clearable
@@ -128,6 +143,7 @@ import { useQuasar } from "quasar";
 import { storeToRefs } from "pinia";
 import { useProductsStore } from "src/stores/products";
 import { onMounted, ref } from "vue";
+import TextInput from "../../components/inputs/TextInput.vue";
 
 type CategoryOption = {
   // trash bs - whether this should be in the store or in a separate file types?
