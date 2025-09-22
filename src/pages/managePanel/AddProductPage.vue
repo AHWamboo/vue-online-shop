@@ -19,41 +19,23 @@
             ]"
           ></TextInput>
 
-          <q-input
-            v-model="productName"
-            clearable
-            clear-icon="close"
-            filled
-            label="Name"
-            hint="Your new product name"
-            lazy-rules
-            :rules="[
-              (val) =>
-                (typeof val === 'string' && val.trim().length > 0) ||
-                'Please enter your product name.',
-              (val) =>
-                !val || val.length <= 50 || 'Please use maximum 50 characters.',
-            ]"
-          ></q-input>
-
-          <q-input
+          <TextInput
             v-model="productPrice"
-            clearable
-            clear-icon="close"
-            filled
             label="Price"
             hint="Your new product price"
-            lazy-rules
-            :rules="[
+            :validation-rules="[
               (val) =>
                 (typeof val === 'string' && val.trim().length > 0) || // trash bs - This validation will not work because the field type will be number, not string
                 'Please provide your product price.',
               (val) =>
-                !val || val.length <= 50 || 'Please use maximum 50 characters.',
+                !val ||
+                String(val).length <= 50 ||
+                'Please use maximum 50 characters.',
               (val) =>
-                !val.includes(',') || 'Please use a period instead of a comma.',
+                !String(val).includes(',') ||
+                'Please use a period instead of a comma.',
             ]"
-          ></q-input>
+          ></TextInput>
 
           <q-input
             v-model="productDescription"
