@@ -37,61 +37,51 @@
             ]"
           ></TextInput>
 
-          <q-input
+          <TextInput
             v-model="productDescription"
-            clearable
-            clear-icon="close"
-            filled
             label="Description"
             hint="Your new product description"
-            lazy-rules
-            :rules="[
+            :validation-rules="[
               (val) =>
                 (typeof val === 'string' && val.trim().length > 0) ||
                 'Please enter your product description.',
               (val) =>
                 !val ||
-                val.length <= 1500 || // trash bs - check what the field length should be
+                String(val).length <= 1500 || // trash bs - check what the field length should be
                 'Please use maximum 1500 characters.',
             ]"
-          ></q-input>
+          ></TextInput>
 
-          <q-input
+          <TextInput
             v-model="productShortDescription"
-            clearable
-            clear-icon="close"
-            filled
             label="Short description"
             hint="Your new product short description"
-            lazy-rules
-            :rules="[
+            :validation-rules="[
               (val) =>
                 (typeof val === 'string' && val.trim().length > 0) ||
                 'Please enter your product short description.',
               (val) =>
                 !val ||
-                val.length <= 500 || // trash bs - check what the field length should be
+                String(val).length <= 500 || // trash bs - check what the field length should be
                 'Please use maximum 500 characters.',
             ]"
-          ></q-input>
+          ></TextInput>
 
-          <q-input
+          <TextInput
             v-model="productImageUrl"
-            clearable
-            clear-icon="close"
-            filled
             label="Image url"
             hint="Your product image url address"
-            lazy-rules
-            :rules="[
+            :validation-rules="[
               (val) =>
                 (typeof val === 'string' && val.trim().length > 0) ||
                 'Please provide your product image url.',
-              (val) => val.length <= 2048 || 'Product image url is too long.',
               (val) =>
-                val.startsWith('https://') || 'Only HTTPS URLs are allowed.',
+                String(val).length <= 2048 || 'Product image url is too long.',
+              (val) =>
+                String(val).startsWith('https://') ||
+                'Only HTTPS URLs are allowed.',
             ]"
-          ></q-input>
+          ></TextInput>
 
           <q-select
             v-model="productCategory"
