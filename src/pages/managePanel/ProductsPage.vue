@@ -17,7 +17,7 @@
       <div class="col-12 col-md-12 col-sm-12">
         <h2 class="brand-red">Products Page</h2>
         <div class="text-subtitle1 q-pa-sm">
-          Use <kbd>SHIFT</kbd> to select / deselect a range and
+          Use key <kbd>SHIFT</kbd> to select / deselect a range and
           <kbd>CTRL</kbd> to add to selection
         </div>
 
