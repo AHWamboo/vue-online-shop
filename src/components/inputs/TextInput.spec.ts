@@ -48,11 +48,10 @@ describe("TextInput - basic behavior tests", () => {
     const wrapper = mountWithStubs();
     const input = wrapper.findComponent(QInput);
     input.setValue("new input value");
-  });
 
-  test("Component has validated input", () => {
-    const wrapper = mountWithStubs();
-    const input = wrapper.findComponent(QInput);
-    input.setValue("new input value");
+    expect(wrapper.emitted()["update:modelValue"]).toBeTruthy();
+    expect(wrapper.emitted()["update:modelValue"]![0]).toEqual([
+      "new input value",
+    ]);
   });
 });
