@@ -31,9 +31,20 @@ describe("TextInput - basic behavior tests", () => {
   test("Renders with correct default prop values", () => {
     const wrapper = mountWithStubs();
     const input = wrapper.findComponent(QInput);
+
     expect(input.exists()).toBe(true);
     expect(input.props("label")).toBe("label message");
     expect(input.props("hint")).toBe("hint message");
+
+    // verify input placeholder value
+    const placeholder = wrapper.find(".q-field__label");
+    expect(placeholder.exists()).toBe(true);
+    expect(placeholder.text()).toBe("label message");
+
+    // verify input hint value
+    const hint = wrapper.find(".q-field__messages");
+    expect(hint.exists()).toBe(true);
+    expect(hint.text()).toBe("hint message");
   });
 
   test("Renders with different props values", () => {
@@ -53,7 +64,7 @@ describe("TextInput - basic behavior tests", () => {
     expect(input.classes()).toBeDefined();
   });
 
-  test("Component has input", () => {
+  test("Component has input value", () => {
     const wrapper = mountWithStubs();
     const input = wrapper.findComponent(QInput);
     input.setValue("new input value");
@@ -72,11 +83,13 @@ describe("TextInput - basic behavior tests", () => {
     await nativeInput.trigger("blur");
     await nextTick();
 
-    const q = wrapper.findComponent(QInput);
-    const ok = await q.vm.validate(); // QInput api method
-    expect(ok).toBe(false);
+    const qInput = wrapper.findComponent(QInput);
+    const rulesOk = await qInput.vm.validate(); // QInput api method (https://quasar.dev/vue-components/input/)
+    expect(rulesOk).toBe(false);
 
-    console.log(q.html());
+    // verify error icon displayed by QInput component
+    const errorIcon = wrapper.find("i.text-negative");
+    expect(errorIcon.exists()).toBe(true);
 
     // verify error message displayed by QInput component
     const messages = wrapper.find('.q-field__messages [role="alert"]');
@@ -85,5 +98,48 @@ describe("TextInput - basic behavior tests", () => {
 
     // check if QInput contains alert class
     expect(wrapper.find(".q-field").classes()).toContain("q-field--error");
+  });
+
+  test("Component fails when length > 50", async () => {
+    const wrapper = mountWithStubs({ modelValue: "", rules });
+    const nativeInput = wrapper.find("input");
+
+    await nativeInput.setValue("a".repeat(54));
+    await nativeInput.trigger("blur");
+    await nextTick();
+
+    const qInput = wrapper.findComponent(QInput);
+
+    const rulesOk = await qInput.vm.validate();
+    expect(rulesOk).toBe(false);
+
+    // verify error icon displayed by QInput component
+    const errorIcon = wrapper.find("i.text-negative");
+    expect(errorIcon.exists()).toBe(true);
+
+    const messages = wrapper.find('.q-field__messages [role="alert"]');
+    expect(messages.text()).toContain("Please use maximum 50 characters.");
+  });
+
+  test("Component passes when value is valid", async () => {
+    const wrapper = mountWithStubs({ modelValue: "", rules });
+    const nativeInput = wrapper.find("input");
+
+    await nativeInput.setValue("Valid name");
+    await nativeInput.trigger("blur");
+    await nextTick();
+
+    const qInput = wrapper.findComponent(QInput);
+    const rulesOk = await qInput.vm.validate();
+    expect(rulesOk).toBe(true);
+
+    // verify error icon displayed by QInput component
+    const errorIcon = wrapper.find("i.text-negative");
+    expect(errorIcon.exists()).toBe(false);
+
+    // no validation error and class applied
+    const messages = wrapper.find('.q-field__messages [role="alert"]');
+    expect(messages.exists()).toBe(false);
+    expect(wrapper.find(".q-field").classes()).not.toContain("q-field--error");
   });
 });
