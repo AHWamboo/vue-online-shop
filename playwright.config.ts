@@ -13,20 +13,12 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   use: {
-    baseURL: "https://www.reutersconnect.com/login", // http://localhost:9000/#/
+    baseURL: "http://localhost:9000/#/",
     trace: "on",
     testIdAttribute: "data-e2e",
   },
   reporter: [
     ["html", { open: "on-failure", outputFolder: TEST_OUTPUT_FOLDER }],
-    // ["junit", { outputFile: `${TEST_OUTPUT_FOLDER}/playwright-results.xml` }],
-    // [
-    //   "./test/e2e/configuration/customReporter/index.ts",
-    //   {
-    //     outputFile: `${TEST_OUTPUT_FOLDER}/comment-jenkins-report.json`,
-    //     inputTemplate: customReport,
-    //   },
-    // ],
   ],
   projects: listOfProjects,
 });
