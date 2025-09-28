@@ -1,17 +1,16 @@
 import { expect } from "@playwright/test";
-import { test } from "@pwHelpers/playwrightTest";
+import { test } from "@pwHelpers/pages";
 
-test.describe("TC-LOGIN As an Admin - I want to test login", function () {
-  test("TC-LOGIN01 Login options", async ({ indexPage }) => {
-    const { $el } = indexPage;
+test.describe("TC-INDEX As an Admin - I want to test index page", function () {
+  test("TC-INDEX01 - popular products", async ({ indexPage }) => {
+    const { popularProduct } = indexPage;
 
-    await expect($el.loginInput).toBeVisible();
+    await test.step("Go to index page and verify popular products", async () => {
+      await indexPage.goto();
 
-    await $el.loginInput.fill("login");
-    await $el.passwordInput.fill("paswdword");
+      await expect(popularProduct).toHaveCount(8);
+    });
 
-    await expect($el.continueButton).toBeVisible();
-
-    await test.step(``, async () => {});
+    await indexPage.page.pause();
   });
 });

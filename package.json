@@ -16,7 +16,7 @@
     "quasarClean": "quasar clean",
     "postinstall": "quasar prepare",
     "store": "quasar new store store",
-    "pw:admin": "playwright test --project=adminProject",
+    "pw:admin": "playwright test --project=adminProject --headed",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
     "test:unit": "vitest",
     "test:unit:ci": "vitest run"

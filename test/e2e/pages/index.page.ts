@@ -1,27 +1,15 @@
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 
-function getElements(page: Page) {
-  const loginInput = page.locator("#username");
-  const passwordInput = page.locator("#password");
-  const submitButton = page.getByRole("button", { name: "Sign in" });
-  const continueButton = page.getByRole("button", { name: "Continue" });
-  const alertBox = page.locator('div[role="alert"]');
+export class IndexPage {
+  readonly page: Page;
+  popularProduct: Locator;
 
-  return {
-    loginInput,
-    passwordInput,
-    submitButton,
-    continueButton,
-    alertBox,
-  };
-}
+  constructor(page: Page) {
+    this.page = page;
+    this.popularProduct = this.page.locator(".popular-picture");
+  }
 
-export function IndexPage(page: Page) {
-  const $el = getElements(page);
-
-  return {
-    $el,
-
-    async exampleFunction() {},
-  };
+  async goto() {
+    await this.page.goto("/");
+  }
 }

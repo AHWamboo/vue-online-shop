@@ -6,7 +6,7 @@
       "#q-app/*": [".quasar/app/*"],
       "@/*": ["src/*"],
       "@pwPages/*": ["test/e2e/pages/*"],
-      "@pwHelpers/*": ["test/e2e/helpers/*"],
+      "@pwHelpers/*": ["test/e2e/fixtures/*"],
       "@pwData/*": ["test/e2e/data/*"],
       "pages/*": ["src/pages/*"],
       "layouts/*": ["src/layouts/*"],
