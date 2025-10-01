@@ -170,7 +170,7 @@ const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
 };
 
 async function onSubmit() {
-  console.log("Product has been submitted");
+  console.log("Product has been submitted.");
   console.log(`
     product name: ${productName.value},
     product price: ${productPrice.value},
