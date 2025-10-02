@@ -110,10 +110,12 @@ function openRemoveModal(id: number) {
   removeModal.value = true;
 }
 
-function openEditModal(id: number) {
+async function openEditModal(id: number) {
   store.productId = id;
   editModal.value = true;
-  console.log(store.productId);
+  console.log(`${store.productId}`);
+  const productDetails = await store.getProductById(store.productId);
+  console.log(productDetails);
 }
 
 const deleteSelected = async () => {

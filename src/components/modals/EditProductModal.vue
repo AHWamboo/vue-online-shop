@@ -115,23 +115,15 @@
 </template>
 
 <script setup lang="ts">
-import { useProductsStore } from "src/stores/products";
 import TextInput from "../../components/inputs/TextInput.vue";
 import { ref } from "vue";
 
-const store = useProductsStore();
 const model = defineModel<boolean>({ required: true });
 const productName = ref("");
 const productPrice = ref("");
 const productDescription = ref("");
 const productShortDescription = ref("");
 const productImageUrl = ref("");
-
-function getProductData() {
-  console.log(`In Edit product modal: ${store.productId}`);
-}
-
-getProductData();
 
 function onSubmit() {
   console.log("Form has been submitted!");
