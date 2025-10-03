@@ -48,7 +48,7 @@
                 hint="Your new product price"
                 :validation-rules="[
                   (val) =>
-                    (typeof val === 'string' && val.trim().length > 0) || // trash bs - This validation will not work because the field type will be number, not string
+                    (typeof val === 'string' && val.trim().length > 0) || //  trash bs - This validation will not work because the field type will be number, not string
                     'Please provide your product price.',
                   (val) =>
                     !val ||
