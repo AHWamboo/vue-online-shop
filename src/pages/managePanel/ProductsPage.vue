@@ -10,7 +10,14 @@
   >
   </MessageModal>
 
-  <EditProductModal v-model="editModal"></EditProductModal>
+  <EditProductModal
+    v-model="editModal"
+    :product-name="selectedProduct?.name || ''"
+    :product-price="selectedProduct?.price?.toString() || ''"
+    :product-description="selectedProduct?.description || ''"
+    :product-short-description="selectedProduct?.short_description || ''"
+    :product-image-url="selectedProduct?.image_url || ''"
+  ></EditProductModal>
 
   <q-page class="q-pa-md">
     <div class="row justify-left">
@@ -97,6 +104,7 @@ const tableRef = ref();
 const selected = ref([]);
 const removeModal = ref(false);
 const editModal = ref(false);
+const selectedProduct = ref<Product | null>(null);
 
 const getProducts = async () => {
   const products = await getAllProducts.value;
@@ -112,10 +120,14 @@ function openRemoveModal(id: number) {
 
 async function openEditModal(id: number) {
   store.productId = id;
-  editModal.value = true;
   console.log(`${store.productId}`);
   const productDetails = await store.getProductById(store.productId);
   console.log(productDetails);
+
+  if (productDetails) {
+    selectedProduct.value = productDetails;
+    editModal.value = true;
+  }
 }
 
 const deleteSelected = async () => {

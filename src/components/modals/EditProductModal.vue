@@ -116,14 +116,55 @@
 
 <script setup lang="ts">
 import TextInput from "../../components/inputs/TextInput.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const model = defineModel<boolean>({ required: true });
-const productName = ref("");
-const productPrice = ref("");
-const productDescription = ref("");
-const productShortDescription = ref("");
-const productImageUrl = ref("");
+
+const props = defineProps({
+  productName: {
+    type: String,
+    required: true,
+  },
+  productPrice: {
+    type: String,
+    default: "",
+  },
+  productDescription: {
+    type: String,
+    default: "",
+  },
+  productShortDescription: {
+    type: String,
+    default: "",
+  },
+  productImageUrl: {
+    type: String,
+    default: "",
+  },
+});
+
+const productName = ref(props.productName);
+const productPrice = ref(props.productPrice);
+const productDescription = ref(props.productDescription);
+const productShortDescription = ref(props.productShortDescription);
+const productImageUrl = ref(props.productImageUrl);
+
+watch(
+  [
+    () => props.productName,
+    () => props.productPrice,
+    () => props.productDescription,
+    () => props.productShortDescription,
+    () => props.productImageUrl,
+  ],
+  ([newName, newPrice, newDescription, newShortDescription, newImageUrl]) => {
+    productName.value = newName;
+    productPrice.value = newPrice;
+    productDescription.value = newDescription;
+    productShortDescription.value = newShortDescription;
+    productImageUrl.value = newImageUrl;
+  }
+);
 
 function onSubmit() {
   console.log("Form has been submitted!");
