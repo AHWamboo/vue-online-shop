@@ -106,6 +106,24 @@
                     'Only HTTPS URLs are allowed.',
                 ]"
               ></TextInput>
+
+              <q-select
+                v-model="productCategory"
+                filled
+                :options="productCategoriesList"
+                hint="Choose product category"
+                label="Product categories"
+                @update:model-value="onProductCategoryChange"
+              ></q-select>
+
+              <q-select
+                v-model="productSubCategory"
+                filled
+                :options="productSubCategoriesList"
+                label="Product sub category"
+                hint="Choose product sub category"
+                :disable="!productSubCategoriesList"
+              ></q-select>
             </q-form>
           </div>
         </q-page>
@@ -117,6 +135,12 @@
 <script setup lang="ts">
 import TextInput from "../../components/inputs/TextInput.vue";
 import { ref, watch } from "vue";
+
+type CategoryOption = {
+  // trash bs - whether this should be in the store or in a separate file types?
+  label: string;
+  value: number;
+};
 
 const model = defineModel<boolean>({ required: true });
 
@@ -148,6 +172,10 @@ const productPrice = ref(props.productPrice);
 const productDescription = ref(props.productDescription);
 const productShortDescription = ref(props.productShortDescription);
 const productImageUrl = ref(props.productImageUrl);
+const productCategory = ref<CategoryOption | null>(null);
+const productSubCategory = ref<CategoryOption | null>(null);
+const productCategoriesList = ref();
+const productSubCategoriesList = ref();
 
 watch(
   [
@@ -165,6 +193,10 @@ watch(
     productImageUrl.value = newImageUrl;
   }
 );
+
+const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
+  console.log(selectedCategory);
+};
 
 function onSubmit() {
   console.log("Form has been submitted!");
