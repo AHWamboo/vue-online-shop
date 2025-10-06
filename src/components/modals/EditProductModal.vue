@@ -108,7 +108,7 @@
               ></TextInput>
 
               <q-select
-                v-model="productCategory"
+                v-model="selectedCategory"
                 filled
                 :options="productCategoriesList"
                 hint="Choose product category"
@@ -117,7 +117,7 @@
               ></q-select>
 
               <q-select
-                v-model="productSubCategory"
+                v-model="selectedSubCategory"
                 filled
                 :options="productSubCategoriesList"
                 label="Product sub category"
@@ -165,6 +165,14 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  productCategory: {
+    type: String,
+    default: "",
+  },
+  productSubCategory: {
+    type: String,
+    default: "",
+  },
 });
 
 const productName = ref(props.productName);
@@ -172,8 +180,8 @@ const productPrice = ref(props.productPrice);
 const productDescription = ref(props.productDescription);
 const productShortDescription = ref(props.productShortDescription);
 const productImageUrl = ref(props.productImageUrl);
-const productCategory = ref<CategoryOption | null>(null);
-const productSubCategory = ref<CategoryOption | null>(null);
+const selectedCategory = ref<CategoryOption | null>(null);
+const selectedSubCategory = ref<CategoryOption | null>(null);
 const productCategoriesList = ref();
 const productSubCategoriesList = ref();
 

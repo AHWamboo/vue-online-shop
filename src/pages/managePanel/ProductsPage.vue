@@ -17,6 +17,10 @@
     :product-description="selectedProduct?.description || ''"
     :product-short-description="selectedProduct?.short_description || ''"
     :product-image-url="selectedProduct?.image_url || ''"
+    :product-category="selectedProduct?.product_categories?.[0]?.name || ''"
+    :product-sub-category="
+      selectedProduct?.product_sub_categories?.[0]?.name || ''
+    "
   ></EditProductModal>
 
   <q-page class="q-pa-md">
