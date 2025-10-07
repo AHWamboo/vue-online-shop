@@ -8,8 +8,8 @@ export type Product = {
   description: string;
   short_description: string;
   image_url: string;
-  product_categories: { name: string }[];
-  product_sub_categories: { name: string }[];
+  product_categories: { id: number; name: string }[];
+  product_sub_categories: { id: number; name: string }[];
 };
 
 // trash bs - merge these two types Product and NewProduct, adding product_categories: { name: string }[]; and product_sub_categories: { name: string }[]; as a separate type and extend
@@ -66,8 +66,8 @@ export const useProductsStore = defineStore("products", {
           description, 
           short_description, 
           image_url, 
-          product_categories(name),
-          product_sub_categories(name)
+          product_categories(name, id),
+          product_sub_categories(name, id)
         `
       );
 
@@ -94,8 +94,8 @@ export const useProductsStore = defineStore("products", {
               description,  
               short_description, 
               image_url, 
-              product_categories(name),
-              product_sub_categories(name)
+              product_categories(name, id),
+              product_sub_categories(name, id)
             `
           )
           .eq("id", id)

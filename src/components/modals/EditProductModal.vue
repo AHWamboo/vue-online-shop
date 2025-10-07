@@ -166,12 +166,12 @@ const props = defineProps({
     default: "",
   },
   productCategory: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
   productSubCategory: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
 });
 
@@ -192,13 +192,22 @@ watch(
     () => props.productDescription,
     () => props.productShortDescription,
     () => props.productImageUrl,
+    () => props.productCategory,
   ],
-  ([newName, newPrice, newDescription, newShortDescription, newImageUrl]) => {
+  ([
+    newName,
+    newPrice,
+    newDescription,
+    newShortDescription,
+    newImageUrl,
+    newProductCategory,
+  ]) => {
     productName.value = newName;
     productPrice.value = newPrice;
     productDescription.value = newDescription;
     productShortDescription.value = newShortDescription;
     productImageUrl.value = newImageUrl;
+    selectedCategory.value!.value = newProductCategory;
   }
 );
 
