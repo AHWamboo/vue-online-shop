@@ -17,7 +17,7 @@
     :product-description="selectedProduct?.description || ''"
     :product-short-description="selectedProduct?.short_description || ''"
     :product-image-url="selectedProduct?.image_url || ''"
-    :product-category="selectedProduct?.product_categories?.[0]?.id || 0"
+    :categories-list="selectedProduct?.product_categories || {}"
     :product-sub-category="
       selectedProduct?.product_sub_categories?.[0]?.id || 0
     "
