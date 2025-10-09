@@ -122,7 +122,6 @@
                 :options="productSubCategoriesList"
                 label="Product sub category"
                 hint="Choose product sub category"
-                :disable="!productSubCategoriesList"
               ></q-select>
             </q-form>
           </div>
@@ -165,10 +164,18 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  categoriesList: {
+  productSelectedCategory: {
     type: Object,
     required: true,
   },
+  productSelectedSubCategory: {
+    type: Object,
+    required: true,
+  },
+  // categoriesList: {
+  //   type: Object,
+  //   required: true,
+  // },
 });
 
 const productName = ref(props.productName);
@@ -188,7 +195,9 @@ watch(
     () => props.productDescription,
     () => props.productShortDescription,
     () => props.productImageUrl,
-    () => props.categoriesList,
+    () => props.productSelectedCategory,
+    () => props.productSelectedSubCategory,
+    // () => props.categoriesList,
   ],
   ([
     newName,
@@ -196,20 +205,23 @@ watch(
     newDescription,
     newShortDescription,
     newImageUrl,
-    newCategoriesList,
+    newSelectedProductCategory,
+    newSelectedSubProductCategory,
+    // newCategoriesList,
   ]) => {
     productName.value = newName;
     productPrice.value = newPrice;
     productDescription.value = newDescription;
     productShortDescription.value = newShortDescription;
     productImageUrl.value = newImageUrl;
-    console.log(newCategoriesList);
-    productCategoriesList.value = [
-      {
-        label: newCategoriesList.name,
-        value: newCategoriesList.id,
-      },
-    ];
+    selectedCategory.value = {
+      label: newSelectedProductCategory.name,
+      value: newSelectedProductCategory.id,
+    };
+    selectedSubCategory.value = {
+      label: newSelectedSubProductCategory.name,
+      value: newSelectedSubProductCategory.id,
+    };
   }
 );
 
