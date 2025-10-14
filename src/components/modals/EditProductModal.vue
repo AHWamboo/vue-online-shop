@@ -132,8 +132,10 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import TextInput from "../../components/inputs/TextInput.vue";
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
+import { useProductsStore } from "src/stores/products";
 
 type CategoryOption = {
   // trash bs - whether this should be in the store or in a separate file types?
@@ -141,7 +143,9 @@ type CategoryOption = {
   value: number;
 };
 
+const store = useProductsStore();
 const model = defineModel<boolean>({ required: true });
+const { getAllProductCategories } = storeToRefs(store);
 
 const props = defineProps({
   productName: {
@@ -172,10 +176,6 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  // categoriesList: {
-  //   type: Object,
-  //   required: true,
-  // },
 });
 
 const productName = ref(props.productName);
@@ -188,6 +188,10 @@ const selectedSubCategory = ref<CategoryOption | null>(null);
 const productCategoriesList = ref();
 const productSubCategoriesList = ref();
 
+onMounted(async () => {
+  await getCategories();
+});
+
 watch(
   [
     () => props.productName,
@@ -197,7 +201,6 @@ watch(
     () => props.productImageUrl,
     () => props.productSelectedCategory,
     () => props.productSelectedSubCategory,
-    // () => props.categoriesList,
   ],
   ([
     newName,
@@ -207,7 +210,6 @@ watch(
     newImageUrl,
     newSelectedProductCategory,
     newSelectedSubProductCategory,
-    // newCategoriesList,
   ]) => {
     productName.value = newName;
     productPrice.value = newPrice;
@@ -227,6 +229,17 @@ watch(
 
 const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
   console.log(selectedCategory);
+};
+
+const getCategories = async () => {
+  const categories = await getAllProductCategories.value;
+
+  if (categories) {
+    productCategoriesList.value = categories.categories.map((option) => ({
+      label: option.name,
+      value: option.id,
+    }));
+  }
 };
 
 function onSubmit() {
