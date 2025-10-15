@@ -138,7 +138,7 @@ import { onMounted, ref, watch } from "vue";
 import { useProductsStore } from "src/stores/products";
 
 type CategoryOption = {
-  // trash bs - whether this should be in the store or in a separate file types?
+  // trash bs - whether this should be in the store or in a separate file types??
   label: string;
   value: number;
 };
