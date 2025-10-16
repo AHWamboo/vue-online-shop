@@ -227,15 +227,22 @@ watch(
   }
 );
 
-const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
-  console.log(selectedCategory);
-};
-
 const getCategories = async () => {
   const categories = await getAllProductCategories.value;
 
   if (categories) {
     productCategoriesList.value = categories.categories.map((option) => ({
+      label: option.name,
+      value: option.id,
+    }));
+  }
+};
+
+const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
+  const subCategories = await store.getSubCategories(selectedCategory.value);
+
+  if (subCategories) {
+    productSubCategoriesList.value = subCategories.map((option) => ({
       label: option.name,
       value: option.id,
     }));
