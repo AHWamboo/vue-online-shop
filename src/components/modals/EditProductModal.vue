@@ -133,7 +133,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import TextInput from "../../components/inputs/TextInput.vue";
+import TextInput from "../inputs/TextInput.vue";
 import { onMounted, ref, watch } from "vue";
 import { useProductsStore } from "src/stores/products";
 
@@ -190,6 +190,9 @@ const productSubCategoriesList = ref();
 
 onMounted(async () => {
   await getCategories();
+  if (selectedCategory.value) {
+    await loadSubCategories(selectedCategory.value);
+  }
 });
 
 watch(
@@ -202,7 +205,7 @@ watch(
     () => props.productSelectedCategory,
     () => props.productSelectedSubCategory,
   ],
-  ([
+  async ([
     newName,
     newPrice,
     newDescription,
@@ -216,10 +219,15 @@ watch(
     productDescription.value = newDescription;
     productShortDescription.value = newShortDescription;
     productImageUrl.value = newImageUrl;
-    selectedCategory.value = {
+
+    const newCategory = {
       label: newSelectedProductCategory.name,
       value: newSelectedProductCategory.id,
     };
+    selectedCategory.value = newCategory;
+
+    await loadSubCategories(newCategory);
+
     selectedSubCategory.value = {
       label: newSelectedSubProductCategory.name,
       value: newSelectedSubProductCategory.id,
@@ -238,8 +246,8 @@ const getCategories = async () => {
   }
 };
 
-const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
-  const subCategories = await store.getSubCategories(selectedCategory.value);
+const loadSubCategories = async (category: CategoryOption) => {
+  const subCategories = await store.getSubCategories(category.value);
 
   if (subCategories) {
     productSubCategoriesList.value = subCategories.map((option) => ({
@@ -247,6 +255,11 @@ const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
       value: option.id,
     }));
   }
+};
+
+const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
+  await loadSubCategories(selectedCategory);
+  selectedSubCategory.value = null;
 };
 
 function onSubmit() {
