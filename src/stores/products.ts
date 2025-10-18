@@ -218,6 +218,46 @@ export const useProductsStore = defineStore("products", {
       );
       return true;
     },
+    async updateProduct(id: number, productData: Partial<NewProduct>) {
+      const { data, error } = await supabase
+        .from("products")
+        .update({
+          name: productData.name,
+          price: productData.price,
+          description: productData.description,
+          short_description: productData.short_description,
+          image_url: productData.image_url,
+          category_id: productData.product_category,
+          sub_category_id: productData.product_sub_category,
+        })
+        .eq("id", id)
+        .select();
+
+      if (error) {
+        console.warn(`Error in "updateProduct": ${error.details}`);
+        return false;
+      }
+
+      const productIndex = this.products.findIndex(
+        (product: Product) => product.id === id
+      );
+      if (productIndex !== -1 && data && data.length > 0) {
+        const currentProduct = this.products[productIndex];
+        if (currentProduct) {
+          this.products[productIndex] = {
+            ...currentProduct,
+            name: productData.name || currentProduct.name,
+            price: productData.price || currentProduct.price,
+            description: productData.description || currentProduct.description,
+            short_description:
+              productData.short_description || currentProduct.short_description,
+            image_url: productData.image_url || currentProduct.image_url,
+          };
+        }
+      }
+
+      return true;
+    },
   },
 });
 
