@@ -233,6 +233,8 @@ export const useProductsStore = defineStore("products", {
         .eq("id", id)
         .select();
 
+      console.log(data);
+
       if (error) {
         console.warn(`Error in "updateProduct": ${error.details}`);
         return false;

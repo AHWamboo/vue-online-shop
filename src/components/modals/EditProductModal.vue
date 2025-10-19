@@ -17,7 +17,7 @@
               flat
               label="Edit product"
               color="primary"
-              @click="emit('submit')"
+              @click="updateProduct"
             />
           </q-toolbar-title>
         </q-toolbar>
@@ -26,7 +26,7 @@
       <q-page-container>
         <q-page padding>
           <div class="col-xl-4 col-md-7 col-sm-12 col-xs-12">
-            <q-form class="q-gutter-md" @submit="onSubmit">
+            <q-form class="q-gutter-md">
               <TextInput
                 v-model="productName"
                 label="Name"
@@ -136,6 +136,7 @@ import { storeToRefs } from "pinia";
 import TextInput from "../inputs/TextInput.vue";
 import { onMounted, ref, watch } from "vue";
 import { useProductsStore } from "src/stores/products";
+import { useQuasar } from "quasar";
 
 type CategoryOption = {
   // trash bs - whether this should be in the store or in a separate file types??
@@ -178,6 +179,7 @@ const props = defineProps({
   },
 });
 
+const $q = useQuasar();
 const productName = ref(props.productName);
 const productPrice = ref(props.productPrice);
 const productDescription = ref(props.productDescription);
@@ -262,13 +264,37 @@ const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
   selectedSubCategory.value = null;
 };
 
-function onSubmit() {
-  console.log("Form has been submitted!");
-}
+const updateProduct = async () => {
+  console.log(props);
+  console.log(store.productId);
+  if (store.productId) {
+    const update = await store.updateProduct(store.productId, {
+      name: productName.value,
+      price: Number(productPrice.value),
+      description: productDescription.value,
+      short_description: productShortDescription.value,
+      image_url: productImageUrl.value,
+      product_category: Number(selectedCategory.value),
+      product_sub_category: Number(selectedSubCategory.value),
+    });
 
-const emit = defineEmits<{
-  (e: "submit"): void;
-}>();
+    $q.notify({
+      color: update ? "green-4" : "red-5",
+      textColor: "white",
+      icon: update ? "cloud_done" : "warning",
+      message: update
+        ? "The product has been updated."
+        : "There was a problem while updating the product.",
+    });
+  }
+
+  console.log("Form has been submitted!");
+};
+
+// trahs bs
+// const emit = defineEmits<{
+//   (e: "submit"): void;
+// }>();
 </script>
 
 <style></style>
