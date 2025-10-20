@@ -124,9 +124,7 @@ function openRemoveModal(id: number) {
 
 async function openEditModal(id: number) {
   store.productId = id;
-  console.log(`${store.productId}`);
   const productDetails = await store.getProductById(store.productId);
-  console.log(productDetails);
 
   if (productDetails) {
     selectedProduct.value = productDetails;

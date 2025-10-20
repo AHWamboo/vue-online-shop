@@ -265,8 +265,6 @@ const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
 };
 
 const updateProduct = async () => {
-  console.log(props);
-  console.log(store.productId);
   if (store.productId) {
     const update = await store.updateProduct(store.productId, {
       name: productName.value,
@@ -274,8 +272,8 @@ const updateProduct = async () => {
       description: productDescription.value,
       short_description: productShortDescription.value,
       image_url: productImageUrl.value,
-      product_category: Number(selectedCategory.value),
-      product_sub_category: Number(selectedSubCategory.value),
+      product_category: Number(selectedCategory.value?.value),
+      product_sub_category: Number(selectedSubCategory.value?.value),
     });
 
     $q.notify({
@@ -287,14 +285,7 @@ const updateProduct = async () => {
         : "There was a problem while updating the product.",
     });
   }
-
-  console.log("Form has been submitted!");
 };
-
-// trahs bs
-// const emit = defineEmits<{
-//   (e: "submit"): void;
-// }>();
 </script>
 
 <style></style>
