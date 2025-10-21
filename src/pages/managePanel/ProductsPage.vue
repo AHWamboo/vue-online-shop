@@ -96,13 +96,11 @@ import { onMounted, ref } from "vue";
 import { useQuasar, type QTableColumn } from "quasar";
 import type { Product } from "src/stores/products";
 import { useProductsStore } from "src/stores/products";
-import { storeToRefs } from "pinia";
 import MessageModal from "../../components/modals/MessageModal.vue";
 import EditProductModal from "../../components/modals/EditProductModal.vue";
 
 const $q = useQuasar();
 const store = useProductsStore();
-const { getAllProducts } = storeToRefs(store);
 const productsTable = ref<Product[]>([]);
 const tableRef = ref();
 const selected = ref([]);
@@ -111,9 +109,10 @@ const editModal = ref(false);
 const selectedProduct = ref<Product | null>(null);
 
 const getProducts = async () => {
-  const products = await getAllProducts.value;
+  const products = await store.getAllProducts();
   if (products) {
-    productsTable.value = products;
+    // productsTable.value = products;
+    productsTable.value = store.allProducts;
   }
 };
 

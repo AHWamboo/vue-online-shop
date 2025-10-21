@@ -33,7 +33,7 @@ export type ProductByCategory = {
 
 export const useProductsStore = defineStore("products", {
   state: () => ({
-    products: [] as Product[],
+    allProducts: [] as Product[],
     productId: null as number | null,
   }),
   getters: {
@@ -56,30 +56,6 @@ export const useProductsStore = defineStore("products", {
       const categoriesNames = response.map((item) => item.name); // trash bs - zobacz czy tego gdzies uzywasz?
       const categories = productCategories as { id: number; name: string }[];
       return { categoriesNames, categories };
-    },
-    getAllProducts: async () => {
-      const { data: products, error } = await supabase.from("products").select(
-        `
-          id,
-          name, 
-          price, 
-          description, 
-          short_description, 
-          image_url, 
-          product_categories(name, id),
-          product_sub_categories(name, id)
-        `
-      );
-
-      if (error) {
-        console.warn(
-          `Error in "getAllProducts" function, details: ${error.details}`
-        );
-        return null;
-      }
-
-      const product: Product[] = products;
-      return product;
     },
     getProductById: () => {
       return async (id: number) => {
@@ -114,6 +90,31 @@ export const useProductsStore = defineStore("products", {
     },
   },
   actions: {
+    async getAllProducts() {
+      const { data, error } = await supabase.from("products").select(
+        `
+          id,
+          name, 
+          price, 
+          description, 
+          short_description, 
+          image_url, 
+          product_categories(name, id),
+          product_sub_categories(name, id)
+        `
+      );
+
+      if (error) {
+        console.warn(
+          `Error in "getAllProducts" function, details: ${error.details}`
+        );
+        return null;
+      }
+
+      const product: Product[] = data;
+      this.allProducts = data;
+      return product;
+    },
     addProduct: async (productDetails: NewProduct) => {
       const { data, error } = await supabase
         .from("products")
@@ -212,7 +213,7 @@ export const useProductsStore = defineStore("products", {
         return false;
       }
 
-      this.products = this.products.filter(
+      this.allProducts = this.allProducts.filter(
         // TODO - use this state products on frontend
         (product: Product) => product.id !== id
       );
@@ -238,13 +239,13 @@ export const useProductsStore = defineStore("products", {
         return false;
       }
 
-      const productIndex = this.products.findIndex(
+      const productIndex = this.allProducts.findIndex(
         (product: Product) => product.id === id
       );
       if (productIndex !== -1 && data && data.length > 0) {
-        const currentProduct = this.products[productIndex];
+        const currentProduct = this.allProducts[productIndex];
         if (currentProduct) {
-          this.products[productIndex] = {
+          this.allProducts[productIndex] = {
             ...currentProduct,
             name: productData.name || currentProduct.name,
             price: productData.price || currentProduct.price,
