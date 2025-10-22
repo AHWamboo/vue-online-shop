@@ -231,8 +231,16 @@ export const useProductsStore = defineStore("products", {
           category_id: productData.product_category,
           sub_category_id: productData.product_sub_category,
         })
-        .eq("id", id)
-        .select();
+        .eq("id", id).select(`
+          id,
+          name, 
+          price, 
+          description,  
+          short_description, 
+          image_url, 
+          product_categories(name, id),
+          product_sub_categories(name, id)
+        `);
 
       if (error) {
         console.warn(`Error in "updateProduct": ${error.details}`);
@@ -242,18 +250,12 @@ export const useProductsStore = defineStore("products", {
       const productIndex = this.allProducts.findIndex(
         (product: Product) => product.id === id
       );
+
       if (productIndex !== -1 && data && data.length > 0) {
-        const currentProduct = this.allProducts[productIndex];
-        if (currentProduct) {
-          this.allProducts[productIndex] = {
-            ...currentProduct,
-            name: productData.name || currentProduct.name,
-            price: productData.price || currentProduct.price,
-            description: productData.description || currentProduct.description,
-            short_description:
-              productData.short_description || currentProduct.short_description,
-            image_url: productData.image_url || currentProduct.image_url,
-          };
+        const updatedProduct = data[0] as Product;
+
+        if (updatedProduct) {
+          this.allProducts[productIndex] = updatedProduct;
         }
       }
 
