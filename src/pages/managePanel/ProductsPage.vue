@@ -111,7 +111,6 @@ const selectedProduct = ref<Product | null>(null);
 const getProducts = async () => {
   const products = await store.getAllProducts();
   if (products) {
-    // productsTable.value = products;
     productsTable.value = store.allProducts;
   }
 };
@@ -133,17 +132,21 @@ async function openEditModal(id: number) {
 
 const deleteSelected = async () => {
   console.log(`Delete selected pressed! ${selected.value.length}`);
-  // const idsToDelete = selected.value.map((item: ProductRow) => item.id);
-  // await store.deleteProducts(idsToDelete);
-  // await getProducts();
-  // selected.value = [];
-};
+  for (const product of selected.value as Product[]) {
+    console.log(product.id);
+    const remove = await store.removeProduct(product.id);
 
-// const editProduct = async () => {
-//   console.log(`Edit product pressed! Product ID`);
-//   // TODO: Implement product editing logic
-//   // For example, navigate to edit page or open edit modal
-// };
+    $q.notify({
+      color: remove ? "green-4" : "red-5",
+      textColor: "white",
+      icon: remove ? "cloud_done" : "warning",
+      message: remove
+        ? "The product has been removed."
+        : "There was a problem while removing the product.",
+    });
+  }
+  selected.value = [];
+};
 
 const removeProduct = async () => {
   if (!store.productId) return;
