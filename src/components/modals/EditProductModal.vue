@@ -3,7 +3,7 @@
     <q-layout view="Lhh lpR fff" container class="bg-white text-dark">
       <q-header class="bg-primary">
         <q-toolbar>
-          <q-toolbar-title>Product title</q-toolbar-title>
+          <q-toolbar-title>{{ props.productName }}</q-toolbar-title>
           <q-btn v-close-popup flat round dense icon="close" />
         </q-toolbar>
       </q-header>
