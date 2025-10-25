@@ -170,17 +170,6 @@ const onProductCategoryChange = async (selectedCategory: CategoryOption) => {
 };
 
 async function onSubmit() {
-  console.log("Product has been submitted.");
-  console.log(`
-    product name: ${productName.value},
-    product price: ${productPrice.value},
-    product description: ${productDescription.value},
-    product short description: ${productShortDescription.value},
-    product img url: ${productImageUrl.value},
-    product category: ${productCategory.value?.value},
-    product sub category: ${productSubCategory.value?.value},
-  `);
-
   const addProduct = await store.addProduct({
     name: productName.value,
     price: +productPrice.value,
