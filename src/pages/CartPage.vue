@@ -3,14 +3,62 @@
     <div class="col-6 column-equal-width">
       <h4>Cart products</h4>
       <div class="column">
-        <div class="col">Product</div>
-        <div class="col">Product</div>
-        <div class="col">Product</div>
-        <div class="col">Product</div>
-        <div class="col">Product</div>
-        <div class="col">Product</div>
-        <div class="col">Product</div>
-        <div class="col">Product</div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
+        <div class="col row inline">
+          <div class="col text-left">Img</div>
+          <div class="col text-left">Product details</div>
+          <div class="col text-center">Counter</div>
+          <div class="col text-center">Price</div>
+          <div class="col text-right">Trash icon</div>
+        </div>
       </div>
     </div>
     <div class="col-6">
