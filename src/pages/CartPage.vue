@@ -63,6 +63,36 @@
     </div>
     <div class="col-6">
       <h4>Second column</h4>
+      <q-card class="q-pa-md q-mb-md">
+        <q-list bordered>
+          <q-item>
+            <q-item-section>
+              <q-item-label>1 item</q-item-label>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>€34.46 </q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-item-label>Shipping</q-item-label>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Free</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-separator />
+          <q-item>
+            <q-item-section>
+              <q-item-label>Total price</q-item-label>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>€34.46 </q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-btn color="primary" label="Proceed to checkout" />
+        </q-list>
+      </q-card>
     </div>
   </div>
 </template>
