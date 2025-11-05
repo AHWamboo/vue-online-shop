@@ -93,6 +93,43 @@
           <q-btn color="primary" label="Proceed to checkout" />
         </q-list>
       </q-card>
+      <q-card class="q-mt-md">
+        <q-list bordered>
+          <q-expansion-item
+            icon="security"
+            label="Security policy"
+            default-opened
+          >
+            <q-card>
+              <q-card-section>
+                <a href="#" class="text-primary">Lorem ipsum</a> dolor sit amet,
+                consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua.
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+
+          <q-expansion-item icon="local_shipping" label="Delivery policy">
+            <q-card>
+              <q-card-section>
+                <a href="#" class="text-primary">Lorem ipsum</a> dolor sit amet,
+                consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua.
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+
+          <q-expansion-item icon="assignment_return" label="Return policy">
+            <q-card>
+              <q-card-section>
+                <a href="#" class="text-primary">Lorem ipsum</a> dolor sit amet,
+                consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua.
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+        </q-list>
+      </q-card>
     </div>
   </div>
 </template>
