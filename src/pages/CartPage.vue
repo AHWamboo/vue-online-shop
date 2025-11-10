@@ -1,84 +1,300 @@
 <template>
   <div class="row">
-    <div class="col-6 column-equal-width">
+    <div class="col-6 column-equal-width q-ml-md">
       <h4>Cart products</h4>
       <div class="column">
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/hummingbird-printed-t-shirt.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">Hummingbird printed t-shirt</div>
+            <div class="text-caption text-grey">Size: M</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[0]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€24.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(0)"
+            />
+          </div>
         </div>
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/brown-bear-printed-sweater.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">Brown bear printed sweater</div>
+            <div class="text-caption text-grey">Size: L</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[1]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€45.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(1)"
+            />
+          </div>
         </div>
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/the-adventure-begins-framed-poster.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">
+              The adventure begins framed poster
+            </div>
+            <div class="text-caption text-grey">Size: Standard</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[2]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€19.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(2)"
+            />
+          </div>
         </div>
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/today-is-a-good-day-framed-poster.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">
+              Today is a good day framed poster
+            </div>
+            <div class="text-caption text-grey">Size: Standard</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[3]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€19.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(3)"
+            />
+          </div>
         </div>
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/hummingbird-printed-t-shirt.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">Hummingbird printed t-shirt</div>
+            <div class="text-caption text-grey">Size: S</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[4]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€24.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(4)"
+            />
+          </div>
         </div>
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/brown-bear-printed-sweater.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">Brown bear printed sweater</div>
+            <div class="text-caption text-grey">Size: XL</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[5]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€45.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(5)"
+            />
+          </div>
         </div>
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/the-adventure-begins-framed-poster.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">
+              The adventure begins framed poster
+            </div>
+            <div class="text-caption text-grey">Size: Standard</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[6]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€19.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(6)"
+            />
+          </div>
         </div>
-        <div class="col row inline">
-          <div class="col text-left">Img</div>
-          <div class="col text-left">Product details</div>
-          <div class="col text-center">Counter</div>
-          <div class="col text-center">Price</div>
-          <div class="col text-right">Trash icon</div>
+        <div class="col row inline items-center">
+          <div class="col text-left">
+            <q-img
+              src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/today-is-a-good-day-framed-poster.jpg"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+          </div>
+          <div class="col text-left">
+            <div class="text-weight-medium">
+              Today is a good day framed poster
+            </div>
+            <div class="text-caption text-grey">Size: Standard</div>
+          </div>
+          <div class="col text-center">
+            <q-input
+              v-model.number="quantities[7]"
+              type="number"
+              outlined
+              dense
+              style="max-width: 80px"
+              min="1"
+            />
+          </div>
+          <div class="col text-center">€19.99</div>
+          <div class="col text-right">
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="negative"
+              @click="removeItem(7)"
+            />
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-6">
-      <h4>Second column</h4>
+    <div class="col-4 q-ml-md order-summary-section">
+      <h4>Order summary</h4>
       <q-card class="q-pa-md q-mb-md">
         <q-list bordered>
           <q-item>
             <q-item-section>
               <q-item-label>1 item</q-item-label>
             </q-item-section>
-            <q-item-section>
-              <q-item-label>€34.46 </q-item-label>
+            <q-item-section class="text-right">
+              <q-item-label>€34.46</q-item-label>
             </q-item-section>
           </q-item>
           <q-item>
             <q-item-section>
               <q-item-label>Shipping</q-item-label>
             </q-item-section>
-            <q-item-section>
+            <q-item-section class="text-right">
               <q-item-label>Free</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-item-label>Tax (23%)</q-item-label>
+            </q-item-section>
+            <q-item-section class="text-right">
+              <q-item-label>€11.45 </q-item-label>
             </q-item-section>
           </q-item>
           <q-separator />
@@ -86,7 +302,7 @@
             <q-item-section>
               <q-item-label>Total price</q-item-label>
             </q-item-section>
-            <q-item-section>
+            <q-item-section class="text-right">
               <q-item-label>€34.46 </q-item-label>
             </q-item-section>
           </q-item>
@@ -132,9 +348,49 @@
       </q-card>
     </div>
   </div>
+  <div class="row q-mt-lg q-mb-md q-px-md">
+    <div class="col-12">
+      <q-card class="q-pa-md">
+        <h4 class="q-mb-md text-center">Sign up to newsletter</h4>
+        <div class="row q-gutter-sm items-center justify-center">
+          <div class="col-6">
+            <q-input
+              v-model="newsletterEmail"
+              placeholder="Your email address"
+              outlined
+              dense
+              class="newsletter-input"
+            />
+          </div>
+          <div class="col-auto">
+            <q-btn color="primary" icon="send" @click="subscribeNewsletter" />
+          </div>
+        </div>
+      </q-card>
+    </div>
+  </div>
 </template>
 
-<script lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+const newsletterEmail = ref("");
+
+const quantities = ref([1, 2, 1, 1, 1, 1, 1, 1]);
+
+const removeItem = (index: number) => {
+  console.log("Removing item at index:", index);
+  // Tutaj możesz dodać logikę usuwania produktu z koszyka
+};
+
+const subscribeNewsletter = () => {
+  if (newsletterEmail.value) {
+    console.log("Subscribing to newsletter:", newsletterEmail.value);
+    // Tutaj możesz dodać logikę subskrypcji
+    newsletterEmail.value = "";
+  }
+};
+</script>
 
 <style scoped>
 .column-equal-width .column > div {
@@ -145,5 +401,13 @@
 
 .column-equal-width .column + .column {
   margin-top: 1rem;
+}
+
+.order-summary-section {
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>
