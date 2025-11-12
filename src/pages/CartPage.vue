@@ -17,6 +17,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[0]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -49,6 +50,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[1]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -83,6 +85,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[2]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -117,6 +120,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[3]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -149,6 +153,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[4]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -181,6 +186,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[5]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -215,6 +221,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[6]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -249,6 +256,7 @@
           <div class="col text-center">
             <q-input
               v-model.number="quantities[7]"
+              class="product-quantity-input"
               type="number"
               outlined
               dense
@@ -409,5 +417,9 @@ const subscribeNewsletter = () => {
 
 .newsletter-input {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-quantity-input {
+  margin: auto;
 }
 </style>
