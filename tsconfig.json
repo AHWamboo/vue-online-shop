@@ -2,6 +2,8 @@
   "extends": "./.quasar/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "es2022",
+    "moduleResolution": "node",
     "paths": {
       "#q-app/*": [".quasar/app/*"],
       "@/*": ["src/*"],
