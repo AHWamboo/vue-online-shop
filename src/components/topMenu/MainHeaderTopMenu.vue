@@ -27,7 +27,10 @@
       ></menu-link>
       <q-separator dark vertical></q-separator>
 
-      <menu-link icon="shopping_bag" label="Cart" to="/cart"></menu-link>
+      <div class="cart-link">
+        <span class="cart-link-count">{{ cartProductsCount }}</span>
+        <menu-link icon="shopping_bag" label="Cart" to="/cart"></menu-link>
+      </div>
     </q-toolbar>
     <q-toolbar>
       <menu-product-category></menu-product-category>
@@ -51,7 +54,11 @@
 import MenuLink from "src/components/topMenu/MenuLink/MenuLink.vue";
 import MenuProductCategory from "src/components/topMenu/MenuProductCategory.vue";
 import EssentialLink from "src/components/EssentialLink.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useCartStore } from "src/stores/cart";
+
+const cartStore = useCartStore();
+const cartProductsCount = computed(() => cartStore.cartProducts.length);
 
 const linksList = [
   {
@@ -117,5 +124,19 @@ a:focus {
   color: inherit;
   text-decoration: none;
   outline: none;
+}
+
+.cart-link {
+  position: relative;
+}
+.cart-link-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #b80c09;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0 5px;
+  font-size: 12px;
 }
 </style>
