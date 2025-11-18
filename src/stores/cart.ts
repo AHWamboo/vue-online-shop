@@ -1,29 +1,32 @@
 import { defineStore } from "pinia";
-import type { Product } from "./products";
 
 export type AllAttributes = { name: string; selected: string[] }[];
+type CartProduct = {
+  id: number;
+  name: string;
+  price: number;
+  image_url: string;
+  quantity: number;
+};
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
-    cartProducts: [] as Product[],
+    cartProducts: [] as CartProduct[],
   }),
   getters: {
     cartProductsCount: (state) => state.cartProducts.length,
   },
   actions: {
-    addProductToCart(product: Product) {
+    addProductToCart(product: CartProduct) {
       this.cartProducts.push({
         id: product.id,
         name: product.name,
         price: product.price,
-        description: product.description,
-        short_description: product.short_description,
         image_url: product.image_url,
-        product_categories: product.product_categories,
-        product_sub_categories: product.product_sub_categories,
+        quantity: 1,
       });
     },
-    removeProductFromCart(product: Product) {
+    removeProductFromCart(product: CartProduct) {
       this.cartProducts = this.cartProducts.filter(
         (cartProduct) => cartProduct.id !== product.id
       );

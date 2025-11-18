@@ -248,9 +248,12 @@ import { useRoute, useRouter } from "vue-router";
 import type { Product } from "src/stores/products";
 import { useProductsStore } from "src/stores/products";
 import { storeToRefs } from "pinia";
+import { useCartStore } from "src/stores/cart";
+
 const router = useRouter();
 const route = useRoute();
 const store = useProductsStore();
+const cartStore = useCartStore();
 const { getProductById } = storeToRefs(store);
 
 const productSize = ref("S");
@@ -267,6 +270,8 @@ const productSubCategory = ref();
 
 async function getProductDetailsById(id: number): Promise<void> {
   const product: Product | null = await getProductById.value(Number(id));
+
+  console.log("product BS: ", product);
 
   if (product) {
     productName.value = product.name;
@@ -285,6 +290,13 @@ getProductDetailsById(Number(route.params.id));
 
 function addToCart() {
   console.log("addToCart button was clicked");
+  cartStore.addProductToCart({
+    id: Number(route.params.id),
+    name: productName.value,
+    price: productPrice.value,
+    image_url: productImgUrl.value,
+    quantity: productQuantity.value,
+  });
 }
 
 function addToFavorite() {
