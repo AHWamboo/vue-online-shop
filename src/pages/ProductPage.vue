@@ -289,7 +289,6 @@ async function getProductDetailsById(id: number): Promise<void> {
 getProductDetailsById(Number(route.params.id));
 
 function addToCart() {
-  console.log("addToCart button was clicked");
   cartStore.addProductToCart({
     id: Number(route.params.id),
     name: productName.value,
