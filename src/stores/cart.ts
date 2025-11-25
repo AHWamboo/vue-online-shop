@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export type AllAttributes = { name: string; selected: string[] }[];
-type CartProduct = {
+export type CartProduct = {
   id: number;
   name: string;
   price: number;
@@ -25,7 +25,7 @@ function loadCartFromStorage(): CartProduct[] {
   return [];
 }
 
-function saveCartToStorage(cartProducts: CartProduct[]): void {
+function saveCartToStorage(cartProducts: CartProduct[]) {
   if (typeof window === "undefined") return;
 
   try {
@@ -41,6 +41,7 @@ export const useCartStore = defineStore("cart", {
   }),
   getters: {
     cartProductsCount: (state) => state.cartProducts.length,
+    getCartProducts: (state) => state.cartProducts,
   },
   actions: {
     addProductToCart(product: CartProduct) {

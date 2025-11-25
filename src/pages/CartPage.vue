@@ -390,11 +390,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useCartStore, type CartProduct } from "src/stores/cart";
+import { onMounted, ref } from "vue";
 
 const newsletterEmail = ref("");
+const store = useCartStore();
+const cartProducts = ref<CartProduct[]>([]);
 
 const quantities = ref([1, 2, 1, 1, 1, 1, 1, 1]);
+
+onMounted(async () => {
+  cartProducts.value = store.getCartProducts;
+  console.log(cartProducts.value);
+});
 
 const removeItem = (index: number) => {
   console.log("Removing item at index:", index);
