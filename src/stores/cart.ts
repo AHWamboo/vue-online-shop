@@ -8,6 +8,7 @@ export type CartProduct = {
   image_url: string;
   quantity: number;
 };
+export type CartProductWithQuantity = CartProduct & { quantity: number };
 
 const CART_STORAGE_KEY = "cart-products";
 
@@ -42,22 +43,34 @@ export const useCartStore = defineStore("cart", {
   getters: {
     cartProductsCount: (state) => state.cartProducts.length,
     getCartProducts: (state) => state.cartProducts,
+    cartProductsSummarizedQuantity: (state) =>
+      state.cartProducts.reduce((acc, product) => acc + product.quantity, 0),
   },
   actions: {
-    addProductToCart(product: CartProduct) {
-      this.cartProducts.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image_url: product.image_url,
-        quantity: 1,
-      });
+    addProductToCart(product: CartProductWithQuantity) {
+      const existingProduct = this.cartProducts.find(
+        (cartProduct) => cartProduct.id === product.id
+      );
+      if (existingProduct) {
+        existingProduct.quantity += product.quantity;
+      } else {
+        this.cartProducts.push(product);
+      }
       saveCartToStorage(this.cartProducts);
     },
-    removeProductFromCart(product: CartProduct) {
-      this.cartProducts = this.cartProducts.filter(
-        (cartProduct) => cartProduct.id !== product.id
+    removeProductFromCart(product: CartProductWithQuantity) {
+      const existingProduct = this.cartProducts.find(
+        (cartProduct) => cartProduct.id === product.id
       );
+      if (existingProduct) {
+        existingProduct.quantity -= product.quantity;
+        if (existingProduct.quantity <= 0) {
+          this.cartProducts.splice(
+            this.cartProducts.indexOf(existingProduct),
+            1
+          );
+        }
+      }
       saveCartToStorage(this.cartProducts);
     },
     clearCart() {

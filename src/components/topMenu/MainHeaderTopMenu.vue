@@ -58,7 +58,9 @@ import { computed, ref } from "vue";
 import { useCartStore } from "src/stores/cart";
 
 const cartStore = useCartStore();
-const cartProductsCount = computed(() => cartStore.cartProducts.length);
+const cartProductsCount = computed(
+  () => cartStore.cartProductsSummarizedQuantity
+);
 
 const linksList = [
   {

@@ -390,12 +390,12 @@
 </template>
 
 <script setup lang="ts">
-import { useCartStore, type CartProduct } from "src/stores/cart";
+import { useCartStore, type CartProductWithQuantity } from "src/stores/cart";
 import { onMounted, ref } from "vue";
 
 const newsletterEmail = ref("");
 const store = useCartStore();
-const cartProducts = ref<CartProduct[]>([]);
+const cartProducts = ref<CartProductWithQuantity[]>([]);
 
 const quantities = ref([1, 2, 1, 1, 1, 1, 1, 1]);
 
@@ -406,7 +406,7 @@ onMounted(async () => {
 
 const removeItem = (index: number) => {
   console.log("Removing item at index:", index);
-  // Tutaj możesz dodać logikę usuwania produktu z koszyka
+  store.removeProductFromCart(cartProducts.value[0] as CartProductWithQuantity);
 };
 
 const subscribeNewsletter = () => {
