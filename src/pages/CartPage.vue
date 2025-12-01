@@ -25,6 +25,9 @@
                     dense
                     style="max-width: 80px"
                     min="1"
+                    @update:model-value="
+                      (value) => updateQuantity(product.id, value)
+                    "
                   />
                 </div>
                 <div class="col text-center">€{{ product.price }}</div>
@@ -162,13 +165,24 @@ onMounted(async () => {
 
 const removeItem = (index: number) => {
   console.log("Removing item at index:", index);
-  store.removeProductFromCart(cartProducts.value[0] as CartProductWithQuantity);
+  store.removeProductFromCart(cartProducts.value[0] as CartProductWithQuantity); // trash bs - it can't be as 0, it should be the index of the item
+};
+
+const updateQuantity = (
+  productId: number,
+  quantity: number | string | null
+) => {
+  const numQuantity =
+    typeof quantity === "number" ? quantity : Number(quantity);
+  if (!isNaN(numQuantity) && numQuantity > 0) {
+    store.updateProductQuantity(productId, numQuantity);
+  }
 };
 
 const subscribeNewsletter = () => {
   if (newsletterEmail.value) {
     console.log("Subscribing to newsletter:", newsletterEmail.value);
-    // Tutaj możesz dodać logikę subskrypcji
+    // add newsletter subscription logic
     newsletterEmail.value = "";
   }
 };

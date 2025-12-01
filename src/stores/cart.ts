@@ -77,5 +77,15 @@ export const useCartStore = defineStore("cart", {
       this.cartProducts = [];
       saveCartToStorage(this.cartProducts);
     },
+    updateProductQuantity(productId: number, quantity: number) {
+      const existingProduct = this.cartProducts.find(
+        (cartProduct) => cartProduct.id === productId
+      );
+      if (existingProduct) {
+        // Make sure the quantity is at least 1
+        existingProduct.quantity = Math.max(1, quantity);
+        saveCartToStorage(this.cartProducts);
+      }
+    },
   },
 });
