@@ -14,7 +14,9 @@
                   />
                 </div>
                 <div class="col text-left">
-                  <div class="text-weight-medium">{{ product.name }}</div>
+                  <a :href="product.product_url" class="product-link">
+                    <div class="text-weight-medium">{{ product.name }}</div>
+                  </a>
                 </div>
                 <div class="col text-center">
                   <q-input
@@ -243,5 +245,10 @@ const subscribeNewsletter = () => {
   min-height: 0;
   display: flex;
   flex-direction: column;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>

@@ -7,6 +7,7 @@ export type CartProduct = {
   price: number;
   image_url: string;
   quantity: number;
+  product_url: string;
 };
 export type CartProductWithQuantity = CartProduct & { quantity: number };
 

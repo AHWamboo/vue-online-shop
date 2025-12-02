@@ -289,12 +289,15 @@ async function getProductDetailsById(id: number): Promise<void> {
 getProductDetailsById(Number(route.params.id));
 
 function addToCart() {
+  const resolvedRoute = router.resolve(route);
+  const fullUrl = `${window.location.origin}${resolvedRoute.href}`;
   cartStore.addProductToCart({
     id: Number(route.params.id),
     name: productName.value,
     price: productPrice.value,
     image_url: productImgUrl.value,
     quantity: productQuantity.value,
+    product_url: fullUrl,
   });
 }
 
