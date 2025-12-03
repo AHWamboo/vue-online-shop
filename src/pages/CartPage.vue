@@ -32,7 +32,9 @@
                     "
                   />
                 </div>
-                <div class="col text-center">€{{ product.price }}</div>
+                <div class="col text-center">
+                  €{{ formatPrice(product.price) }}
+                </div>
                 <div class="col text-right">
                   <q-btn
                     flat
@@ -55,10 +57,15 @@
           <q-list bordered>
             <q-item>
               <q-item-section>
-                <q-item-label>1 item</q-item-label>
+                <q-item-label
+                  >{{
+                    store.cartProductsSummarizedQuantity
+                  }}
+                  items</q-item-label
+                >
               </q-item-section>
               <q-item-section class="text-right">
-                <q-item-label>€34.46</q-item-label>
+                <q-item-label>€{{ formatPrice(totalPrice) }}</q-item-label>
               </q-item-section>
             </q-item>
             <q-item>
@@ -83,7 +90,7 @@
                 <q-item-label>Total price</q-item-label>
               </q-item-section>
               <q-item-section class="text-right">
-                <q-item-label>€34.46 </q-item-label>
+                <q-item-label>€{{ formatPrice(totalPrice) }} </q-item-label>
               </q-item-section>
             </q-item>
             <q-btn color="primary" label="Proceed to checkout" />
@@ -154,7 +161,7 @@
 
 <script setup lang="ts">
 import { useCartStore, type CartProductWithQuantity } from "src/stores/cart";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 const newsletterEmail = ref("");
 const store = useCartStore();
@@ -164,6 +171,26 @@ onMounted(async () => {
   cartProducts.value = store.getCartProducts;
   console.log(cartProducts.value);
 });
+
+// Watch for changes in cart products from store
+watch(
+  () => store.getCartProducts,
+  (newProducts) => {
+    cartProducts.value = newProducts;
+  },
+  { deep: true }
+);
+
+const totalPrice = computed(() => {
+  return cartProducts.value.reduce(
+    (acc, product) => acc + product.price * product.quantity,
+    0
+  );
+});
+
+const formatPrice = (price: number): string => {
+  return Number(price.toFixed(2)).toFixed(2);
+};
 
 const removeItem = (index: number) => {
   console.log("Removing item at index:", index);
@@ -178,6 +205,8 @@ const updateQuantity = (
     typeof quantity === "number" ? quantity : Number(quantity);
   if (!isNaN(numQuantity) && numQuantity > 0) {
     store.updateProductQuantity(productId, numQuantity);
+    // Update local cart products to reflect changes
+    cartProducts.value = store.getCartProducts;
   }
 };
 
