@@ -4,7 +4,7 @@
       <h4>Cart products</h4>
       <div class="column flex">
         <q-scroll-area class="cart-scroll-area">
-          <div class="cart-items-list">
+          <div v-if="cartProducts.length > 0" class="cart-items-list">
             <div v-for="product in cartProducts" :key="product.id">
               <div class="cart-item row items-center">
                 <div class="col text-left">
@@ -46,6 +46,13 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div v-else>
+            <q-card class="q-pa-md">
+              <q-card-section>
+                <q-item-label>No products in cart</q-item-label>
+              </q-card-section>
+            </q-card>
           </div>
         </q-scroll-area>
       </div>
