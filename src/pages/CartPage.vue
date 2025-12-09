@@ -50,7 +50,9 @@
           <div v-else>
             <q-card class="q-pa-md">
               <q-card-section>
-                <q-item-label>No products in cart</q-item-label>
+                <q-item-label class="text-center"
+                  >No products in cart</q-item-label
+                >
               </q-card-section>
             </q-card>
           </div>
