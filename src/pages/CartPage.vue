@@ -51,7 +51,7 @@
             <q-card class="q-pa-md">
               <q-card-section>
                 <q-item-label class="text-center"
-                  >No products in cart</q-item-label
+                  >No products in cart.</q-item-label
                 >
               </q-card-section>
             </q-card>
@@ -87,7 +87,7 @@
             </q-item>
             <q-item>
               <q-item-section>
-                <q-item-label>Tax (23%)</q-item-label>
+                <q-item-label>Tax ({{ vatRates[0]?.tax_rate }}%)</q-item-label>
               </q-item-section>
               <q-item-section class="text-right">
                 <q-item-label>€11.45 </q-item-label>
@@ -169,16 +169,21 @@
 </template>
 
 <script setup lang="ts">
+import { type VatRate, useVatRatesStore } from "src/stores/vatRates";
 import { useCartStore, type CartProductWithQuantity } from "src/stores/cart";
 import { computed, onMounted, ref, watch } from "vue";
 
 const newsletterEmail = ref("");
 const store = useCartStore();
+const vatRatesStore = useVatRatesStore();
 const cartProducts = ref<CartProductWithQuantity[]>([]);
+const vatRates = ref<VatRate[]>([]);
 
 onMounted(async () => {
   cartProducts.value = store.getCartProducts;
   console.log(cartProducts.value);
+  const vatRatesData = await vatRatesStore.getVatRates();
+  vatRates.value = vatRatesData || [];
 });
 
 // Watch for changes in cart products from store
