@@ -90,7 +90,13 @@
                 <q-item-label>Tax ({{ vatRates[0]?.tax_rate }}%)</q-item-label>
               </q-item-section>
               <q-item-section class="text-right">
-                <q-item-label>€11.45 </q-item-label>
+                <q-item-label
+                  >€{{
+                    formatPrice(
+                      (totalPrice * (vatRates[0]?.tax_rate ?? 0)) / 100
+                    )
+                  }}</q-item-label
+                >
               </q-item-section>
             </q-item>
             <q-separator />
@@ -99,7 +105,14 @@
                 <q-item-label>Total price</q-item-label>
               </q-item-section>
               <q-item-section class="text-right">
-                <q-item-label>€{{ formatPrice(totalPrice) }} </q-item-label>
+                <q-item-label>
+                  €{{
+                    formatPrice(
+                      totalPrice +
+                        (totalPrice * (vatRates[0]?.tax_rate ?? 0)) / 100
+                    )
+                  }}
+                </q-item-label>
               </q-item-section>
             </q-item>
             <q-btn color="primary" label="Proceed to checkout" />
