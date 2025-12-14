@@ -115,7 +115,9 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-            <q-btn color="primary" label="Proceed to checkout" />
+            <router-link to="/checkout"
+              ><q-btn color="primary" label="Proceed to checkout"
+            /></router-link>
           </q-list>
         </q-card>
         <q-card class="q-mt-md">
