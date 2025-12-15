@@ -129,9 +129,17 @@
             >
               <q-card>
                 <q-card-section>
-                  <a href="#" class="text-primary">Lorem ipsum</a> dolor sit
-                  amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
+                  We are committed to
+                  <a href="#" class="text-primary"
+                    >protecting the security and privacy of our customers</a
+                  >
+                  personal information and payment data. All sensitive data,
+                  including credit card information and personal details, is
+                  encrypted using industry-standard SSL/TLS protocols and stored
+                  securely in compliance with GDPR and PCI DSS requirements. We
+                  regularly conduct security audits, monitor for potential
+                  threats, and promptly address any security vulnerabilities to
+                  ensure a safe shopping experience for all users.
                 </q-card-section>
               </q-card>
             </q-expansion-item>
