@@ -114,9 +114,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { type PopularProduct, useProductsStore } from "src/stores/products";
 
 const slide = ref(1);
+const productsStore = useProductsStore();
+
+const popularProducts = ref<PopularProduct[]>([]);
+
+onMounted(async () => {
+  popularProducts.value =
+    (await productsStore.getPopularProducts()) as PopularProduct[];
+  console.log(popularProducts.value);
+});
 </script>
 
 <style scoped>

@@ -23,6 +23,8 @@ export type NewProduct = {
   product_sub_category: number;
 };
 
+export type PopularProduct = Product & { popular: boolean };
+
 export type ProductByCategory = {
   id: number;
   image: string;
@@ -260,6 +262,30 @@ export const useProductsStore = defineStore("products", {
       }
 
       return true;
+    },
+    async getPopularProducts() {
+      const { data, error } = await supabase
+        .from("products")
+        .select(
+          `
+          id,
+          name, 
+          price, 
+          description,  
+          short_description, 
+          image_url, 
+          product_categories(name, id),
+          product_sub_categories(name, id),
+          popular
+        `
+        )
+        .eq("popular", true);
+
+      if (error) {
+        console.warn(`Error in "getPopularProducts": ${error.details}`);
+        return [];
+      }
+      return data;
     },
   },
 });
