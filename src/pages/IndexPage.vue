@@ -47,66 +47,26 @@
 
     <section data-e2e="popular-products-container">
       <div class="row justify-around popular-container">
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <p class="popular-picture-p">-20%</p>
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/hummingbird-printed-t-shirt.jpg"
-          ></q-img>
-          <p class="product-title">Hummingbird printed t-shirt</p>
-        </div>
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/brown-bear-printed-sweater.jpg"
-          ></q-img>
-          <p class="product-title">Brown bear printed sweater</p>
-        </div>
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/the-adventure-begins-framed-poster.jpg"
-          ></q-img>
-          <p class="product-title">Adventure begins framed poster</p>
-        </div>
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/today-is-a-good-day-framed-poster.jpg"
-          ></q-img>
-          <p class="product-title">Good day framed poster</p>
+        <div
+          v-for="(product, index) in popularProducts.slice(0, 4)"
+          :key="product.id"
+          class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular"
+        >
+          <p v-if="index === 0" class="popular-picture-p">-20%</p>
+          <q-img class="popular-picture" :src="product.image_url"></q-img>
+          <p class="product-title">{{ product.name }}</p>
         </div>
       </div>
 
       <div class="row justify-around popular-container">
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <p class="popular-picture-p">-20%</p>
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/mug-today-is-a-good-day.jpg"
-          ></q-img>
-          <p class="product-title">Mug today is a good day</p>
-        </div>
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/mug-the-best-is-yet-to-come.jpg"
-          ></q-img>
-          <p class="product-title">Mug best is yet to come</p>
-        </div>
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/mug-the-adventure-begins.jpg"
-          ></q-img>
-          <p class="product-title">Adventure begins mug</p>
-        </div>
-        <div class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular">
-          <q-img
-            class="popular-picture"
-            src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/products/category-products/mug-today-is-a-good-day.jpg"
-          ></q-img>
-          <p class="product-title">Mug today is a good day</p>
+        <div
+          v-for="(product, index) in popularProducts.slice(4, 8)"
+          :key="product.id"
+          class="col-xl-2 col-md-3 col-sm-6 col-xs-12 popular"
+        >
+          <p v-if="index === 0" class="popular-picture-p">-20%</p>
+          <q-img class="popular-picture" :src="product.image_url"></q-img>
+          <p class="product-title">{{ product.name }}</p>
         </div>
       </div>
     </section>
@@ -174,6 +134,18 @@ onMounted(async () => {
   margin-bottom: 0.5%;
 }
 
+.popular-picture {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.popular-picture :deep(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .popular-picture-p {
   position: absolute;
   top: 0;
@@ -206,11 +178,17 @@ onMounted(async () => {
   .popular {
     padding: 10px;
   }
+  .popular-picture {
+    height: 280px;
+  }
 }
 
 @media (max-width: 1023px) {
   .popular {
     padding: 10px;
+  }
+  .popular-picture {
+    height: 250px;
   }
 }
 </style>
