@@ -54,7 +54,11 @@
         >
           <p v-if="index === 0" class="popular-picture-p">-20%</p>
           <q-img class="popular-picture" :src="product.image_url"></q-img>
-          <p class="product-title">{{ product.name }}</p>
+          <p class="product-title">
+            <router-link :to="`/product/${product.id}`">{{
+              product.name
+            }}</router-link>
+          </p>
         </div>
       </div>
 
@@ -66,7 +70,11 @@
         >
           <p v-if="index === 0" class="popular-picture-p">-20%</p>
           <q-img class="popular-picture" :src="product.image_url"></q-img>
-          <p class="product-title">{{ product.name }}</p>
+          <p class="product-title">
+            <router-link :to="`/product/${product.id}`">{{
+              product.name
+            }}</router-link>
+          </p>
         </div>
       </div>
     </section>
@@ -128,6 +136,10 @@ onMounted(async () => {
   place-items: center;
   margin-bottom: 0px;
   padding: 4px;
+}
+.product-title a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .popular-container {
