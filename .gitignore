@@ -62,7 +62,7 @@ backup-files/
 # my comments, notes
 comments.txt
 TODO.txt
-my-notes/
+my-notes
 
 # Quasar specific
 .quasar/

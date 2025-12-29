@@ -10,6 +10,7 @@ export type Product = {
   image_url: string;
   product_categories: { id: number; name: string }[];
   product_sub_categories: { id: number; name: string }[];
+  popular: boolean;
 };
 
 // trash bs - merge these two types Product and NewProduct, adding product_categories: { name: string }[]; and product_sub_categories: { name: string }[]; as a separate type and extend
@@ -21,6 +22,7 @@ export type NewProduct = {
   image_url: string;
   product_category: number;
   product_sub_category: number;
+  popular?: boolean;
 };
 
 export type PopularProduct = Product & { popular: boolean };
@@ -73,7 +75,8 @@ export const useProductsStore = defineStore("products", {
               short_description, 
               image_url, 
               product_categories(name, id),
-              product_sub_categories(name, id)
+              product_sub_categories(name, id),
+              popular
             `
           )
           .eq("id", id)
@@ -102,7 +105,8 @@ export const useProductsStore = defineStore("products", {
           short_description, 
           image_url, 
           product_categories(name, id),
-          product_sub_categories(name, id)
+          product_sub_categories(name, id),
+          popular
         `
       );
 
@@ -232,6 +236,7 @@ export const useProductsStore = defineStore("products", {
           image_url: productData.image_url,
           category_id: productData.product_category,
           sub_category_id: productData.product_sub_category,
+          popular: productData.popular,
         })
         .eq("id", id).select(`
           id,
@@ -241,7 +246,8 @@ export const useProductsStore = defineStore("products", {
           short_description, 
           image_url, 
           product_categories(name, id),
-          product_sub_categories(name, id)
+          product_sub_categories(name, id),
+          popular
         `);
 
       if (error) {

@@ -21,6 +21,7 @@
     :product-selected-sub-category="
       selectedProduct?.product_sub_categories || {}
     "
+    :product-popular="selectedProduct?.popular || false"
   ></EditProductModal>
 
   <q-page class="q-pa-md">

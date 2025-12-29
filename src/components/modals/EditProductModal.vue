@@ -123,6 +123,12 @@
                 label="Product sub category"
                 hint="Choose product sub category"
               ></q-select>
+
+              <q-toggle
+                v-model="productPopular"
+                label="Popular"
+                hint="Is the product popular?"
+              ></q-toggle>
             </q-form>
           </div>
         </q-page>
@@ -177,6 +183,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  productPopular: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const $q = useQuasar();
@@ -189,6 +199,7 @@ const selectedCategory = ref<CategoryOption | null>(null);
 const selectedSubCategory = ref<CategoryOption | null>(null);
 const productCategoriesList = ref();
 const productSubCategoriesList = ref();
+const productPopular = ref(props.productPopular);
 
 onMounted(async () => {
   await getCategories();
@@ -206,6 +217,7 @@ watch(
     () => props.productImageUrl,
     () => props.productSelectedCategory,
     () => props.productSelectedSubCategory,
+    () => props.productPopular,
   ],
   async ([
     newName,
@@ -215,13 +227,14 @@ watch(
     newImageUrl,
     newSelectedProductCategory,
     newSelectedSubProductCategory,
+    newProductPopular,
   ]) => {
     productName.value = newName;
     productPrice.value = newPrice;
     productDescription.value = newDescription;
     productShortDescription.value = newShortDescription;
     productImageUrl.value = newImageUrl;
-
+    productPopular.value = newProductPopular;
     const newCategory = {
       label: newSelectedProductCategory.name,
       value: newSelectedProductCategory.id,
@@ -274,6 +287,7 @@ const updateProduct = async () => {
       image_url: productImageUrl.value,
       product_category: Number(selectedCategory.value?.value),
       product_sub_category: Number(selectedSubCategory.value?.value),
+      popular: productPopular.value,
     });
 
     $q.notify({
