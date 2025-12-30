@@ -93,7 +93,6 @@ const popularProducts = ref<PopularProduct[]>([]);
 onMounted(async () => {
   popularProducts.value =
     (await productsStore.getPopularProducts()) as PopularProduct[];
-  console.log(popularProducts.value);
 });
 </script>
 

@@ -39,6 +39,7 @@ export const useProductsStore = defineStore("products", {
   state: () => ({
     allProducts: [] as Product[],
     productId: null as number | null,
+    popularProducts: [] as PopularProduct[],
   }),
   getters: {
     getAllProductCategories: async () => {
@@ -291,6 +292,7 @@ export const useProductsStore = defineStore("products", {
         console.warn(`Error in "getPopularProducts": ${error.details}`);
         return [];
       }
+      this.popularProducts = data;
       return data;
     },
   },

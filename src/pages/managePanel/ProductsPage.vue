@@ -66,6 +66,25 @@
             <q-checkbox v-model="scope.selected" color="dark" />
           </template>
 
+          <template #body-cell-popular="props">
+            <q-td :props="props">
+              <span
+                v-if="props.value"
+                class="popular-icon material-symbols-outlined"
+                style="color: green; font-size: 24px"
+              >
+                check
+              </span>
+              <span
+                v-else
+                class="popular-icon material-symbols-outlined"
+                style="color: gray; font-size: 24px"
+              >
+                check_indeterminate_small
+              </span>
+            </q-td>
+          </template>
+
           <template #body-cell-actions="props">
             <q-td :props="props">
               <q-btn
@@ -176,6 +195,7 @@ const rows = productsTable;
 type ProductRow = {
   id: number;
   name: string;
+  popular: boolean;
   price: string;
   short_description: string;
   product_categories: { name: string };
@@ -199,6 +219,12 @@ const columns: QTableColumn<ProductRow>[] = [
     sortable: true,
     sort: (a: string, b: string) => a.localeCompare(b),
     required: true,
+  },
+  {
+    name: "popular",
+    field: "popular",
+    align: "left",
+    label: "Popular",
   },
   {
     name: "price",
@@ -245,5 +271,9 @@ const columns: QTableColumn<ProductRow>[] = [
 .products-table-delete-button,
 .products-table-edit-button {
   margin-left: 10px;
+}
+
+.popular-icon {
+  font-size: 24px;
 }
 </style>

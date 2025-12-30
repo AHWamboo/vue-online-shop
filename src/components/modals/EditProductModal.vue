@@ -128,7 +128,19 @@
                 v-model="productPopular"
                 label="Popular"
                 hint="Is the product popular?"
+                :disable="isPopularToggleDisabled"
               ></q-toggle>
+              <div
+                v-if="shouldShowWarning"
+                class="popular-limit-warning text-negative"
+                role="alert"
+              >
+                <q-icon name="warning" size="xs" class="q-mr-xs" />
+                <span class="warning-text"
+                  >Maximum of 8 popular products allowed. Please unmark another
+                  product as popular first.</span
+                >
+              </div>
             </q-form>
           </div>
         </q-page>
@@ -140,7 +152,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import TextInput from "../inputs/TextInput.vue";
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useProductsStore } from "src/stores/products";
 import { useQuasar } from "quasar";
 
@@ -153,6 +165,7 @@ type CategoryOption = {
 const store = useProductsStore();
 const model = defineModel<boolean>({ required: true });
 const { getAllProductCategories } = storeToRefs(store);
+const popularProductsCount = ref(0);
 
 const props = defineProps({
   productName: {
@@ -200,13 +213,44 @@ const selectedSubCategory = ref<CategoryOption | null>(null);
 const productCategoriesList = ref();
 const productSubCategoriesList = ref();
 const productPopular = ref(props.productPopular);
+const initialProductPopular = ref(props.productPopular);
+
+const isPopularToggleDisabled = computed(() => {
+  // If product is currently popular, allow to unmark it
+  if (productPopular.value) {
+    return false;
+  }
+  // If there are 8 or more popular products, disable toggle
+  return popularProductsCount.value >= 8;
+});
+
+const shouldShowWarning = computed(() => {
+  // Show warning only when:
+  // 1. Toggle is disabled (8+ popular products)
+  // 2. Product was NOT initially popular (we're trying to mark it as popular)
+  return isPopularToggleDisabled.value && !initialProductPopular.value;
+});
 
 onMounted(async () => {
   await getCategories();
   if (selectedCategory.value) {
     await loadSubCategories(selectedCategory.value);
   }
+  // Load popular products count
+  await loadPopularProductsCount();
 });
+
+const loadPopularProductsCount = async () => {
+  const popularProducts = await store.getPopularProducts();
+  if (popularProducts) {
+    // If current product is already popular, exclude it from count
+    const currentProductId = store.productId;
+    const count = currentProductId
+      ? popularProducts.filter((p) => p.id !== currentProductId).length
+      : popularProducts.length;
+    popularProductsCount.value = count;
+  }
+};
 
 watch(
   [
@@ -235,6 +279,7 @@ watch(
     productShortDescription.value = newShortDescription;
     productImageUrl.value = newImageUrl;
     productPopular.value = newProductPopular;
+    initialProductPopular.value = newProductPopular;
     const newCategory = {
       label: newSelectedProductCategory.name,
       value: newSelectedProductCategory.id,
@@ -290,6 +335,9 @@ const updateProduct = async () => {
       popular: productPopular.value,
     });
 
+    // Reload popular products count after update
+    await loadPopularProductsCount();
+
     $q.notify({
       color: update ? "green-4" : "red-5",
       textColor: "white",
@@ -302,4 +350,16 @@ const updateProduct = async () => {
 };
 </script>
 
-<style></style>
+<style scoped>
+.popular-limit-warning {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.warning-text {
+  flex: 1;
+}
+</style>
