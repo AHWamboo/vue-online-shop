@@ -163,9 +163,11 @@
             <q-expansion-item icon="assignment_return" label="Return policy">
               <q-card>
                 <q-card-section>
-                  <a href="#" class="text-primary">Lorem ipsum</a> dolor sit
-                  amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
+                  Returns accepted within 14 days of purchase. Items must be
+                  unused, in original packaging with receipt. Full refunds
+                  processed within 5-7 business days.
+                  <a href="#" class="text-primary">Read more</a> about our
+                  return policy.
                 </q-card-section>
               </q-card>
             </q-expansion-item>
