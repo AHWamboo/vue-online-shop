@@ -67,6 +67,14 @@
             <q-item-section>Contact messages</q-item-section>
           </q-item>
         </router-link>
+        <router-link to="/managePanel/sliders">
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon name="image"></q-icon>
+            </q-item-section>
+            <q-item-section>Sliders</q-item-section>
+          </q-item>
+        </router-link>
       </q-list>
     </q-drawer>
 

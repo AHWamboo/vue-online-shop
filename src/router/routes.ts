@@ -64,6 +64,10 @@ const routes: RouteRecordRaw[] = [
         path: "contactMessages",
         component: () => import("src/pages/managePanel/ContactMessages.vue"),
       },
+      {
+        path: "sliders",
+        component: () => import("src/pages/managePanel/SlidersPage.vue"),
+      },
     ],
     meta: { requiresAuth: true },
   },
