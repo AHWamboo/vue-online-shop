@@ -9,7 +9,7 @@
           <div class="text-subtitle1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
             tristique in tortor et dignissim. Quisque non tempor leo. Maecenas
-            egestas sem elit
+            egestas sem elit.
           </div>
         </div></q-carousel-slide
       >
@@ -21,7 +21,7 @@
           <div class="text-subtitle1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
             tristique in tortor et dignissim. Quisque non tempor leo. Maecenas
-            egestas sem elit
+            egestas sem elit.
           </div>
         </div></q-carousel-slide
       >
@@ -33,7 +33,7 @@
           <div class="text-subtitle1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
             tristique in tortor et dignissim. Quisque non tempor leo. Maecenas
-            egestas sem elit
+            egestas sem elit.
           </div>
         </div></q-carousel-slide
       >
