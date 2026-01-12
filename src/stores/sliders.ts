@@ -17,7 +17,7 @@ export const useSlidersStore = defineStore("sliders", {
       const { data, error } = await supabase.from("sliders").select("*");
       if (error) {
         console.warn(
-          `Error in "getSliders" function, details: ${error.details}`
+          `Error in "getSliders" function, details: ${error.details}.`
         );
         return null;
       }
