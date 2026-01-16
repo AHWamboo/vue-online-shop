@@ -4,7 +4,7 @@ import { defineStore, acceptHMRUpdate } from "pinia";
 export type Slider = {
   id: string;
   image_url: string;
-  title: string;
+  header: string;
   description: string;
   link: string;
 };
