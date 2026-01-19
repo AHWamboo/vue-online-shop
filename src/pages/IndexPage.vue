@@ -2,41 +2,22 @@
   <q-page class="q-pa-none">
     <q-carousel v-model="slide" animated infinite arrows>
       <q-carousel-slide
-        :name="1"
-        img-src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/sliders/main-slider/main-page-slider-1.jpg"
-        ><div class="absolute custom-caption">
-          <div class="text-h2">Header 1</div>
-          <div class="text-subtitle1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-            tristique in tortor et dignissim. Quisque non tempor leo. Maecenas
-            egestas sem elit.
-          </div>
-        </div></q-carousel-slide
+        v-for="(slider, index) in sliders"
+        :key="slider.id"
+        :name="index + 1"
+        :img-src="slider.image_url"
       >
-      <q-carousel-slide
-        :name="2"
-        img-src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/sliders/main-slider/main-page-slider-2.jpg"
-        ><div class="absolute-bottom custom-caption">
-          <div class="text-h2">Header 2</div>
-          <div class="text-subtitle1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-            tristique in tortor et dignissim. Quisque non tempor leo. Maecenas
-            egestas sem elit.
-          </div>
-        </div></q-carousel-slide
-      >
-      <q-carousel-slide
-        :name="3"
-        img-src="https://fzlwitffxljqlligkttm.supabase.co/storage/v1/object/public/online-shop-pictures/sliders/main-slider/main-page-slider-3.jpg"
-        ><div class="absolute-bottom custom-caption">
-          <div class="text-h2">Header 3</div>
-          <div class="text-subtitle1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-            tristique in tortor et dignissim. Quisque non tempor leo. Maecenas
-            egestas sem elit.
-          </div>
-        </div></q-carousel-slide
-      >
+        <div
+          :class="
+            index === 0
+              ? 'absolute custom-caption'
+              : 'absolute-bottom custom-caption'
+          "
+        >
+          <div class="text-h2">{{ slider.header }}</div>
+          <div class="text-subtitle1">{{ slider.description }}</div>
+        </div>
+      </q-carousel-slide>
     </q-carousel>
 
     <q-separator class="separator"></q-separator>
@@ -84,15 +65,24 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { type PopularProduct, useProductsStore } from "src/stores/products";
+import { useSlidersStore } from "src/stores/sliders";
+import type { Slider } from "src/stores/sliders";
 
 const slide = ref(1);
 const productsStore = useProductsStore();
+const slidersStore = useSlidersStore();
 
 const popularProducts = ref<PopularProduct[]>([]);
+const sliders = ref<Slider[]>([]);
 
 onMounted(async () => {
   popularProducts.value =
     (await productsStore.getPopularProducts()) as PopularProduct[];
+
+  const slidersData = await slidersStore.getSliders();
+  if (slidersData) {
+    sliders.value = slidersData;
+  }
 });
 </script>
 
